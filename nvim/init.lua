@@ -1,0 +1,2 @@
+require("enes")
+print("hello")
