@@ -1,2 +1,1 @@
 require("enes")
-print("hello")
