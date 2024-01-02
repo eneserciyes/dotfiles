@@ -1,11 +1,30 @@
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$HOME/.emacs.d/bin:$PATH";
-export MODULAR_HOME="/Users/mehmeteneserciyes/.modular"
-export PATH="/Users/mehmeteneserciyes/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+export XDG_CONFIG_HOME=$HOME/.config
+VIM="nvim"
+
+PERSONAL=$XDG_CONFIG_HOME/personal
+source $PERSONAL/env
+for i in `find -L $PERSONAL`; do
+    source $i
+done
+source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+source /opt/homebrew/opt/fzf/shell/completion.zsh
+
+export CC="clang-12"
+export CXX="clang++-12"
+export GIT_EDITOR=$VIM
+export DOTFILES=$HOME/projects/dotfiles
+
+addToPathFront $HOME/.local/scripts
+addToPathFront $HOME/.local/bin
+
+bindkey -s ^f "tmux-sessionizer\n"
+
+# Mojo
+export MODULAR_HOME="$HOME/.modular"
+addToPathFront $HOME/.modular/pkg/packages.modular.com_mojo/bin
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-source ~/.aliases
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
