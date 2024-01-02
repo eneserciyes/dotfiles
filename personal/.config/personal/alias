@@ -58,4 +58,5 @@ alias note="gh issue -R jph00/notes create"
 # Git
 alias gaa="git add -A"
 alias gc="commit"
+alias gs="git status"
 
