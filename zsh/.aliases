@@ -1,0 +1,58 @@
+commit () { git commit -am "${1}" && git push; }
+fixes () { git commit -am "fixes #${1}" && git push; }
+
+alias a=alias
+
+a issues="gh issue list"
+a issue="gh issue create"
+a enhancement="gh issue create -l enhancement -b '' -t"
+a bug="gh issue create -l bug -b '' -t"
+a breaking="gh issue create -l breaking -b '' -t"
+a note="gh issue -R jph00/notes create"
+
+# General
+alias grep="grep --colour='auto'"
+alias ip='ipython --no-banner --matplotlib'
+alias pip-update="pip install --upgrade pip && pip freeze --local | grep -v \
+'^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias py="python3"
+alias jn='jupyter-notebook --ip=0.0.0.0 --port=8888'
+alias jn-remote="jupyter-notebook --ip='*' --no-browser --port=8889"
+alias jl='jupyter-lab --ip=0.0.0.0 --port=8888'
+alias deac="conda deactivate"
+alias nv="nvidia-smi"
+alias update="source ~/.zshrc"
+
+# navigational convenience
+alias ll="ls -l"
+alias l="ls -al"
+alias back="cd - > /dev/null"
+alias   ..='cd ../'
+alias  ...='cd ../../'
+alias ....='cd ../../../'
+alias   .3='cd ../../../'
+alias   .4='cd ../../../../'
+alias   .5='cd ../../../../../'
+alias c='clear'
+
+# tmux
+alias tn="tmux"
+alias ta="tmux attach"
+alias tl="tmux list-sessions"
+alias t0="tmux attach -t 0"
+alias t1="tmux attach -t 1"
+alias t2="tmux attach -t 2"
+alias t3="tmux attach -t 3"
+alias t4="tmux attach -t 4"
+alias t5="tmux attach -t 5"
+alias tk0="tmux kill-session -t 0"
+alias tk1="tmux kill-session -t 1"
+alias tk2="tmux kill-session -t 2"
+alias tk3="tmux kill-session -t 3"
+alias tk4="tmux kill-session -t 4"
+alias tk5="tmux kill-session -t 5"
+
+# Custom
+
+alias minst="mamba install -c defaults"
+
