@@ -101,6 +101,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.zsh_profile
 
+# eval homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/mehmeteneserciyes/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"

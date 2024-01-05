@@ -11,7 +11,6 @@ alias ip='ipython --no-banner --matplotlib'
 alias pip-update="pip install --upgrade pip && pip freeze --local | grep -v \
 '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias py="python3"
-alias python="python3"
 alias jn='jupyter-notebook --ip=0.0.0.0 --port=8888'
 alias jn-remote="jupyter-notebook --ip='*' --no-browser --port=8889"
 alias jl='jupyter-lab --ip=0.0.0.0 --port=8888'

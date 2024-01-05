@@ -13,6 +13,7 @@ export CC="clang-12"
 export CXX="clang++-12"
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/projects/dotfiles
+export PYTHONBREAKPOINT="pudb.set_trace"
 
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
@@ -27,4 +28,3 @@ addToPathFront $HOME/.modular/pkg/packages.modular.com_mojo/bin
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
