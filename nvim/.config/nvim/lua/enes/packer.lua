@@ -51,6 +51,18 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  use {
+      "folke/which-key.nvim",
+      config = function()
+          vim.o.timeout = true
+          vim.o.timeoutlen = 1000
+          require("which-key").setup {
+              -- your configuration comes here
+              -- or leave it empty to use the default settings
+              -- refer to the configuration section below
+          }
+      end
+  }
   use("theprimeagen/harpoon")
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
