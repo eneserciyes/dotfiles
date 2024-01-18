@@ -9,8 +9,8 @@ done
 source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 source /opt/homebrew/opt/fzf/shell/completion.zsh
 
-export CC="clang-12"
-export CXX="clang++-12"
+export CC="clang"
+export CXX="clang++"
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/projects/dotfiles
 export PYTHONBREAKPOINT="pudb.set_trace"
