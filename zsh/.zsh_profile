@@ -1,13 +1,23 @@
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     export MACHINE=Linux;;
+    Darwin*)    export MACHINE=Mac;;
+esac
+echo $MACHINE
+
 PERSONAL=$XDG_CONFIG_HOME/personal
 source $PERSONAL/env
 for i in `find -L $PERSONAL`; do
     source $i
 done
-source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-source /opt/homebrew/opt/fzf/shell/completion.zsh
+
+if [[ $MACHINE == "Mac" ]]; then;
+    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+    source /opt/homebrew/opt/fzf/shell/completion.zsh
+fi
 
 export CC="clang"
 export CXX="clang++"
@@ -17,7 +27,9 @@ export PYTHONBREAKPOINT="pudb.set_trace"
 
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
-
+if [[ $MACHINE == "Linux" ]]; then
+    addToPathFront $HOME/.fzf/bin
+fi
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Mojo
