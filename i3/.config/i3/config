@@ -24,6 +24,7 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 exec --no-startup-id dex --autostart --environment i3
 exec_always --no-startup-id nitrogen --restore
 exec --no-startup-id xset r rate 200 35
+exec_always --no-startup-id compton
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
