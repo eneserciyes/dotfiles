@@ -58,6 +58,18 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+## Screenshots
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+
+
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -128,13 +140,13 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Firefox"
-set $ws2 "2: Terminal"
-set $ws3 "3: Obsidian"
-set $ws4 "4: Zotero"
-set $ws5 "5: Files"
-set $ws6 "6: Spotify"
-set $ws7 "7: Discord"
-set $ws8 "8"
+set $ws2 "2: VS Code"
+set $ws3 "3: Terminal"
+set $ws4 "4: Obsidian"
+set $ws5 "5: Zotero"
+set $ws6 "6: Files"
+set $ws7 "7: Spotify"
+set $ws8 "8: Papers"
 set $ws9 "9"
 set $ws10 "10"
 

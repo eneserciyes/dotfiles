@@ -73,5 +73,6 @@ return require('packer').startup(function(use)
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
   use("github/copilot.vim")
+  use("folke/zen-mode.nvim")
 end)
 
