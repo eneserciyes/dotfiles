@@ -15,7 +15,9 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-require('mason').setup({})
+require('mason').setup({
+  ensure_installed = {'mypy', 'ruff', 'black'},
+})
 require('mason-lspconfig').setup({
   ensure_installed = {'tsserver', 'rust_analyzer', 'pyright', 'clangd'},
   handlers = {

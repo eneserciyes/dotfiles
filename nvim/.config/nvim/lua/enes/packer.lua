@@ -35,6 +35,8 @@ return require('packer').startup(function(use)
 	  end
   }
 
+  use 'nvimtools/none-ls.nvim'
+
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
@@ -74,5 +76,16 @@ return require('packer').startup(function(use)
   use("tpope/vim-fugitive")
   use("github/copilot.vim")
   use("folke/zen-mode.nvim")
+
+  -- Nvim DAP
+  use 'mfussenegger/nvim-dap'
+  use {
+      "mfussenegger/nvim-dap-python",
+      config = function()
+          local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+          require("dap-python").setup(path)
+      end
+  }
+
 end)
 
