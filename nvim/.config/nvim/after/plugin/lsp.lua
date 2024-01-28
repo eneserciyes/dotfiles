@@ -16,7 +16,7 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 require('mason').setup({
-  ensure_installed = {'mypy', 'ruff', 'black'},
+  ensure_installed = {'mypy', 'ruff', 'black', 'debugpy'},
 })
 require('mason-lspconfig').setup({
   ensure_installed = {'tsserver', 'rust_analyzer', 'pyright', 'clangd'},
