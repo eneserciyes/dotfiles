@@ -13,19 +13,18 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
- -- use({
- --     'rose-pine/neovim',
- --     as = 'rose-pine',
- --     config = function()
- --   	  vim.cmd('colorscheme rose-pine')
- --     end
- -- })
-  use ({ 
-    "catppuccin/nvim", as = "catppuccin", 
-    config = function()
-        vim.cmd('colorscheme catppuccin')
-    end
+  use({
+      'rose-pine/neovim', as = 'rose-pine',
+      config = function()
+    	  vim.cmd('colorscheme rose-pine')
+      end
   })
+  --use ({
+  --  "catppuccin/nvim", as = "catppuccin",
+  --  --config = function()
+  --  --    vim.cmd('colorscheme catppuccin')
+  --  --end
+  --})
 
   use {
 	  'nvim-treesitter/nvim-treesitter',
@@ -34,6 +33,8 @@ return require('packer').startup(function(use)
 		  ts_update()
 	  end
   }
+
+  use 'nvimtools/none-ls.nvim'
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -74,5 +75,34 @@ return require('packer').startup(function(use)
   use("tpope/vim-fugitive")
   use("github/copilot.vim")
   use("folke/zen-mode.nvim")
+
+  -- Nvim DAP
+  use 'mfussenegger/nvim-dap'
+  use {
+      "rcarriga/nvim-dap-ui",
+      requires = { "mfussenegger/nvim-dap" },
+      config = function()
+          local dap = require("dap")
+          local dapui = require("dapui")
+          dapui.setup()
+          dap.listeners.after.event_initialized["dapui_config"] = function()
+              dapui.open()
+          end
+          dap.listeners.before.event_terminated["dapui_config"] = function()
+              dapui.close()
+          end
+          dap.listeners.before.event_exited["dapui_config"] = function()
+              dapui.close()
+          end
+      end
+  }
+  use {
+      "mfussenegger/nvim-dap-python",
+      requires = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+      config = function()
+          local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+          require("dap-python").setup(path)
+      end
+  }
 end)
 
