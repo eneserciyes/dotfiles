@@ -75,6 +75,7 @@ return require('packer').startup(function(use)
   use("tpope/vim-fugitive")
   use("github/copilot.vim")
   use("folke/zen-mode.nvim")
+  use("jpalardy/vim-slime")
 
   -- Nvim DAP
   -- use 'mfussenegger/nvim-dap'
