@@ -4,6 +4,11 @@ vim.keymap.set("n", "<leader>zz", function()
             width = 100,
             options = { }
         },
+        plugins = {
+            options={
+                laststatus=3,
+            }
+        }
     }
     require("zen-mode").toggle()
     vim.wo.wrap = false
