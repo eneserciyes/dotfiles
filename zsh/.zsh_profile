@@ -40,6 +40,10 @@ bindkey -s ^f "tmux-sessionizer\n"
 export MODULAR_HOME="$HOME/.modular"
 addToPathFront $HOME/.modular/pkg/packages.modular.com_mojo/bin
 
+# CUDA
+export PATH=/usr/local/cuda-12/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
