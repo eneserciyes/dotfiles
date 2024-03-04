@@ -1,0 +1,8 @@
+window:
+  opacity: 0.9
+keyboard:
+  bindings:
+  - {key: Key1, mods: Control, chars: "\x14\x31" }  
+  - {key: Key2, mods: Control, chars: "\x14\x32" }  
+  - {key: Key3, mods: Control, chars: "\x14\x33" }  
+  - {key: Key4, mods: Control, chars: "\x14\x34" }  
