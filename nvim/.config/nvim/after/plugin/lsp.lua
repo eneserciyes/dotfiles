@@ -15,17 +15,33 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 require('mason').setup({
-  ensure_installed = {'mypy', 'ruff', 'black'},
+    ensure_installed = {'mypy', 'ruff', 'black'},
 })
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'rust_analyzer', 'pyright', 'clangd'},
-  handlers = {
-    lsp_zero.default_setup,
-    lua_ls = function()
-      local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-  }
+    ensure_installed = {'tsserver', 'rust_analyzer', 'pyright', 'clangd'},
+    handlers = {
+        lsp_zero.default_setup,
+        lua_ls = function()
+            local lua_opts = lsp_zero.nvim_lua_ls()
+            require('lspconfig').lua_ls.setup(lua_opts)
+        end,
+        pyright = function()
+            require('lspconfig').pyright.setup({
+                settings = {
+                    pyright = {
+                        disableOrganizeImports = true,
+                    },
+                    python = {
+                        analysis = {
+                            -- Disable the linter
+                            ignore = { '*' }, -- use ruff instead
+                            typeCheckingMode = 'off', -- use mypy instead
+                        }
+                    }
+                }
+            })
+        end
+    }
 })
 
 local cmp = require('cmp')

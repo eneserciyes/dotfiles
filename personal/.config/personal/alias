@@ -6,6 +6,10 @@ alias update="source ~/.zshrc"
 alias nv="nvidia-smi"
 alias dotFileInstall="$DOTFILES/install"
 
+# VPN
+alias vpn="sudo openconnect -b vpn.nyu.edu"
+alias vpn-close="sudo killall -SIGINT openconnect"
+
 # Python
 alias ip='ipython --no-banner --matplotlib'
 alias pip-update="pip install --upgrade pip && pip freeze --local | grep -v \

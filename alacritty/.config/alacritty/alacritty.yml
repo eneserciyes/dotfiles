@@ -1,5 +1,5 @@
 window:
-  opacity: 0.9
+  opacity: 1.0
 keyboard:
   bindings:
   - {key: Key1, mods: Control, chars: "\x14\x31" }  
