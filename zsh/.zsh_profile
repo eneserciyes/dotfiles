@@ -16,6 +16,7 @@ done
 if [[ $MACHINE == "Mac" ]]; then;
     source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
     source /opt/homebrew/opt/fzf/shell/completion.zsh
+    addToPathFront "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 if [[ $MACHINE == "Linux" ]]; then;
     source $HOME/.fzf/shell/key-bindings.zsh
