@@ -13,7 +13,7 @@ for i in `find -L $PERSONAL`; do
     source $i
 done
 
-if [[ $MACHINE == "Mac" ]]; then;
+if [[ -z $TMUX ]] && [[ $MACHINE == "Mac" ]]; then;
     source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
     source /opt/homebrew/opt/fzf/shell/completion.zsh
     addToPathFront "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -27,11 +27,11 @@ export CC="gcc"
 export CXX="g++"
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/projects/dotfiles
-export PYTHONBREAKPOINT="pudb.set_trace"
+export PYTHONBREAKPOINT="ipdb.set_trace"
 
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
-if [[ $MACHINE == "Linux" ]]; then
+if [[ -z $TMUX ]] && [[ $MACHINE == "Linux" ]]; then
     addToPathFront $HOME/.fzf/bin
     addToPathFront /snap/bin
     addToPathFront /usr/local/cuda/bin
@@ -40,12 +40,14 @@ fi
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Mojo
-export MODULAR_HOME="$HOME/.modular"
-addToPathFront $HOME/.modular/pkg/packages.modular.com_mojo/bin
+# export MODULAR_HOME="$HOME/.modular"
+# addToPathFront $HOME/.modular/pkg/packages.modular.com_mojo/bin
 
 # CUDA
-export PATH=/usr/local/cuda-12/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH
+if [[ -z $TMUX ]]; then
+    addToPathFront /usr/local/cuda-12/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH
+fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
