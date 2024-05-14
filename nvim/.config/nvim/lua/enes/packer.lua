@@ -1,4 +1,4 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+    -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd('packer.nvim')
@@ -71,10 +71,8 @@ return require('packer').startup(function(use)
       end
   }
   use("theprimeagen/harpoon")
-  use("mbbill/undotree")
   use("tpope/vim-fugitive")
   use("github/copilot.vim")
-  use("folke/zen-mode.nvim")
   use("jpalardy/vim-slime")
 
   -- Nvim DAP
