@@ -1,3 +1,5 @@
+module load neovim/0.9.5
+
 [ -f $HOME/.bash_aliases ] && source $HOME/.bash_aliases
 export PATH=$HOME/.local/bin:$PATH
 export PS1="[\u@\h \W]\$ "
