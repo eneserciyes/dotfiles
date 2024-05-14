@@ -1,3 +1,6 @@
+export E_OVERLAY="/scratch/me2646/enes_setup/overlay-15GB-500K.ext3"
+export E_IMAGE="/scratch/work/public/singularity/cuda12.2.2-cudnn8.9.4-devel-ubuntu22.04.3.sif" 
+
 addToPath() {
     if [[ "$PATH" != *"$1"* ]]; then
         export PATH=$PATH:$1

@@ -1,12 +1,34 @@
 module load neovim/0.9.5
 
-[ -f $HOME/.bash_aliases ] && source $HOME/.bash_aliases
-export PATH=$HOME/.local/bin:$PATH
+export XDG_CONFIG_HOME=$HOME/.config
+VIM="nvim"
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     export MACHINE=Linux;;
+    Darwin*)    export MACHINE=Mac;;
+esac
+
+PERSONAL=$XDG_CONFIG_HOME/personal
+source $PERSONAL/env
+source $PERSONAL/alias
+
 export PS1="[\u@\h \W]\$ "
 export SINGULARITYENV_PS1=(Singularity)${PS1}
 
+export CC="gcc"
+export CXX="g++"
+export GIT_EDITOR=$VIM
+export DOTFILES=$HOME/projects/dotfiles
 export PYTHONBREAKPOINT="ipdb.set_trace"
 export MUJOCO_GL="egl"
+
+# [ -f $HOME/.bash_aliases ] && source $HOME/.bash_aliases
+
+addToPathFront $HOME/.local/scripts
+addToPathFront $HOME/.local/bin
+
+# bindkey -s ^f "tmux-sessionizer\n"
 
 unset -f which
 
