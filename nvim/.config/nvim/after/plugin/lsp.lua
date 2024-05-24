@@ -34,7 +34,7 @@ require('mason-lspconfig').setup({
                     python = {
                         analysis = {
                             -- Disable the linter
-                            ignore = { '*' }, -- use ruff instead
+                            -- ignore = { '*' }, -- use ruff instead
                             typeCheckingMode = 'off', -- use mypy instead
                         }
                     }

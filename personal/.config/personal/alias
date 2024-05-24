@@ -3,6 +3,7 @@ alias scr="cd /scratch/me2646/"
 alias sing="singularity exec --nv --overlay $E_OVERLAY:ro $E_IMAGE /bin/bash"
 alias singw="singularity exec --nv --overlay $E_OVERLAY $E_IMAGE /bin/bash"
 alias conda="source /ext3/env.sh"
+alias sq="squeue -u me2646"
 
 # General
 alias proj="cd ~/projects"
