@@ -102,11 +102,15 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh_profile
 
 # eval homebrew
-if [[ $MACHINE == "Mac" ]]; then
+if [[ -z $TMUX ]] && [[ $MACHINE == "Mac" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # >>> conda initialize >>>
+#
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$("$HOME/miniforge3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -121,7 +125,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
