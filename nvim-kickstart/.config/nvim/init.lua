@@ -666,13 +666,39 @@ require('lazy').setup({
     'tpope/vim-fugitive',
     config = function()
       vim.keymap.set('n', '<leader>gs', function()
-        vim.cmd.Git()
-        vim.cmd.resize(15)
+        vim.cmd.vsplit()
+        vim.cmd '0G'
       end)
     end,
   },
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+
+  {
+    'theprimeagen/harpoon',
+    config = function()
+      local mark = require 'harpoon.mark'
+      local ui = require 'harpoon.ui'
+
+      vim.keymap.set('n', '<leader>a', mark.add_file)
+      vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
+
+      vim.keymap.set('n', '<C-t>1', function()
+        ui.nav_file(1)
+      end)
+      vim.keymap.set('n', '<C-t>2', function()
+        ui.nav_file(2)
+      end)
+      vim.keymap.set('n', '<C-t>3', function()
+        ui.nav_file(3)
+      end)
+      vim.keymap.set('n', '<C-t>4', function()
+        ui.nav_file(4)
+      end)
+    end,
+  },
+
+  {
+    'github/copilot.vim',
+  },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
