@@ -1,0 +1,28 @@
+[[keyboard.bindings]]
+chars = "\u00141"
+key = "Key1"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00142"
+key = "Key2"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00143"
+key = "Key3"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00144"
+key = "Key4"
+mods = "Control"
+
+[window]
+opacity = 1.0
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }

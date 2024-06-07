@@ -10,6 +10,10 @@ alias dotFileInstall="$DOTFILES/install"
 alias vpn="sudo openconnect -b vpn.nyu.edu"
 alias vpn-close="sudo killall -SIGINT openconnect"
 
+# Display
+alias dimleft="xrandr --output DisplayPort-0 --brightness 0.3"
+alias brightleft="xrandr --output DisplayPort-0 --brightness 1"
+
 # Python
 alias ip='ipython --no-banner --matplotlib'
 alias pip-update="pip install --upgrade pip && pip freeze --local | grep -v \

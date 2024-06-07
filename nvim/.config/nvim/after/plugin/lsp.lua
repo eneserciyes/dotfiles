@@ -18,7 +18,7 @@ require('mason').setup({
     ensure_installed = {'mypy', 'ruff', 'black'},
 })
 require('mason-lspconfig').setup({
-    ensure_installed = {'tsserver', 'rust_analyzer', 'pyright', 'clangd'},
+    ensure_installed = {'rust_analyzer', 'pyright', 'clangd'},
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
