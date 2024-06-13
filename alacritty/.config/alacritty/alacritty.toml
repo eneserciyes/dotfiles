@@ -1,3 +1,11 @@
+import = [
+  "~/.config/alacritty/catppuccin-macchiato.toml"
+]
+
+
+[env]
+TERM = "xterm-256color"
+
 [[keyboard.bindings]]
 chars = "\u00141"
 key = "Key1"
