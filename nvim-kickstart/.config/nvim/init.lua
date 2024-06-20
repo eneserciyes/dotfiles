@@ -620,7 +620,7 @@ require('lazy').setup({
     name = 'catppuccin',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     opts = {
-      transparent_background = false,
+      transparent_background = true,
     },
     init = function()
       vim.cmd.colorscheme 'catppuccin-macchiato'
