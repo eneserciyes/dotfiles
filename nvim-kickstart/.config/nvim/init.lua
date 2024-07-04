@@ -71,6 +71,10 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Set fold expr
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 --
@@ -620,7 +624,7 @@ require('lazy').setup({
     name = 'catppuccin',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     opts = {
-      transparent_background = true,
+      transparent_background = false,
     },
     init = function()
       vim.cmd.colorscheme 'catppuccin-macchiato'
