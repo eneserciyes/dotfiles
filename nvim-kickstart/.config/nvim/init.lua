@@ -719,6 +719,9 @@ require('lazy').setup({
 
   {
     'github/copilot.vim',
+    config = function()
+      vim.cmd [[ Copilot disable ]]
+    end,
   },
 
   -- Vim Tmux navigation
@@ -755,6 +758,24 @@ require('lazy').setup({
 
       -- Open parent directory in floating window
       vim.keymap.set('n', '<space>-', require('oil').toggle_float)
+    end,
+  },
+
+  {
+    'klafyvel/vim-slime-cells',
+    dependencies = { 'jpalardy/vim-slime' },
+    config = function()
+      vim.g.slime_target = 'tmux'
+      vim.g.slime_cell_delimiter = '# %%'
+      vim.g.slime_default_config = { socket_name = 'default', target_pane = '{last}' }
+      vim.g.slime_python_ipython = 1
+      vim.g.slime_dont_ask_default = 1
+      vim.cmd [[
+      nmap <leader>cv <Plug>SlimeConfig
+      nmap <leader>cc <Plug>SlimeCellsSendAndGoToNext
+      nmap <leader>cj <Plug>SlimeCellsNext
+      nmap <leader>ck <Plug>SlimeCellsPrev
+      ]]
     end,
   },
 }, {
