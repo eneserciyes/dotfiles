@@ -604,29 +604,13 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    opts = {
-      transparent_background = false,
-    },
-    init = function()
-      -- vim.cmd.colorscheme 'catppuccin-macchiato'
-      -- vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-
-  {
-    'folke/tokyonight.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    init = function()
-      vim.cmd.colorscheme 'tokyonight'
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  { 'folke/tokyonight.nvim', lazy = false, priority = 1000, opts = {} },
+  { 'neanias/everforest-nvim', version = false, lazy = false, priority = 1000 },
+  { 'shaunsingh/nord.nvim', priority = 1000, lazy = false },
+  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+  { 'rebelot/kanagawa.nvim', priority = 1000, lazy = false },
+  { 'rose-pine/neovim', priority = 1000, lazy = false, name = 'rose-pine' },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -793,3 +777,6 @@ require('lazy').setup({
     },
   },
 })
+
+vim.cmd.colorscheme 'gruvbox'
+vim.cmd.hi 'Comment gui=none'

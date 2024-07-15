@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 if [[ -z $STOW_FOLDERS ]]; then
-   STOW_FOLDERS="nvim-kickstart,zsh,tmux,personal,bin,alacritty,oh-my-zsh"
+   STOW_FOLDERS="nvim-kickstart,tmux"
 fi
 
 if [[ -z $DOTFILES ]]; then
