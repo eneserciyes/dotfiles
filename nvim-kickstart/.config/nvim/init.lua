@@ -758,6 +758,30 @@ require('lazy').setup({
       ]]
     end,
   },
+
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+
+    config = function()
+      require('telekasten').setup { home = vim.fn.expand '~/ws/notes' }
+    end,
+  },
+
+  {
+    'folke/zen-mode.nvim',
+    opts = {
+      width = 150,
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    config = function()
+      vim.keymap.set('n', '<leader>zz', function()
+        require('zen-mode').toggle()
+      end)
+    end,
+  },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
