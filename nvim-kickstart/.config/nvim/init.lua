@@ -699,9 +699,9 @@ require('lazy').setup({
 
   {
     'github/copilot.vim',
-    config = function()
-      vim.cmd [[ Copilot disable ]]
-    end,
+    -- config = function()
+    -- vim.cmd [[ Copilot disable ]]
+    -- end,
   },
 
   -- Vim Tmux navigation
@@ -716,30 +716,30 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'stevearc/oil.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('oil').setup {
-        columns = { 'icon' },
-        keymaps = {
-          ['<C-h>'] = false,
-          ['<C-l>'] = false,
-          ['<C-p>'] = false,
-          ['<M-h>'] = false,
-        },
-        view_options = {
-          show_hidden = true,
-        },
-      }
+  --{
+  --  'stevearc/oil.nvim',
+  --  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  --  config = function()
+  --    require('oil').setup {
+  --      columns = { 'icon' },
+  --      keymaps = {
+  --        ['<C-h>'] = false,
+  --        ['<C-l>'] = false,
+  --        ['<C-p>'] = false,
+  --        ['<M-h>'] = false,
+  --      },
+  --      view_options = {
+  --        show_hidden = true,
+  --      },
+  --    }
 
-      -- Open parent directory in current window
-      vim.keymap.set('n', '<leader>pv', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+  --    -- Open parent directory in current window
+  --    vim.keymap.set('n', '<leader>pv', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
-      -- Open parent directory in floating window
-      vim.keymap.set('n', '<space>-', require('oil').toggle_float)
-    end,
-  },
+  --    -- Open parent directory in floating window
+  --    vim.keymap.set('n', '<space>-', require('oil').toggle_float)
+  --  end,
+  --},
 
   {
     'klafyvel/vim-slime-cells',
@@ -756,6 +756,16 @@ require('lazy').setup({
       nmap <leader>cj <Plug>SlimeCellsNext
       nmap <leader>ck <Plug>SlimeCellsPrev
       ]]
+    end,
+  },
+
+  -- nvim tree
+  {
+    'nvim-tree/nvim-tree.lua',
+    lazy = false,
+    config = function()
+      require('nvim-tree').setup()
+      vim.keymap.set('n', '<c-n>', '<CMD>NvimTreeToggle<CR>', { desc = 'Toggle NvimTree' })
     end,
   },
 }, {
@@ -778,5 +788,5 @@ require('lazy').setup({
   },
 })
 
-vim.cmd.colorscheme 'gruvbox'
+vim.cmd.colorscheme 'tokyonight-night'
 vim.cmd.hi 'Comment gui=none'
