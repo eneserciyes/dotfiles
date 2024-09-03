@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 if [[ -z $STOW_FOLDERS ]]; then
    STOW_FOLDERS="nvim-kickstart,tmux"
 fi
