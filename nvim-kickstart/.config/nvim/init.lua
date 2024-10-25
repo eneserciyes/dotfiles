@@ -788,5 +788,5 @@ require('lazy').setup({
   },
 })
 
-vim.cmd.colorscheme 'catppuccin-mocha'
+vim.cmd.colorscheme 'rose-pine-main'
 vim.cmd.hi 'Comment gui=none'
