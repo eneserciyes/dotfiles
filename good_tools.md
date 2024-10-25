@@ -1,0 +1,3 @@
+bat
+eza
+lazygit
