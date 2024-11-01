@@ -457,16 +457,16 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                ignore = { '*' }, -- Disable all analysis, use ruff
-                typeCheckingMode = 'off',
-              },
-            },
-          },
-        },
+        -- pyright = {
+        --   settings = {
+        --     python = {
+        --       analysis = {
+        --         ignore = { '*' }, -- Disable all analysis, use ruff
+        --         typeCheckingMode = 'off',
+        --       },
+        --     },
+        --   },
+        -- },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
