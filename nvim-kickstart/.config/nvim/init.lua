@@ -610,7 +610,7 @@ require('lazy').setup({
   { 'shaunsingh/nord.nvim', priority = 1000, lazy = false },
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
   { 'rebelot/kanagawa.nvim', priority = 1000, lazy = false },
-  { 'rose-pine/neovim', priority = 1000, lazy = false, name = 'rose-pine' },
+  { 'rose-pine/neovim', priority = 1000, lazy = false, name = 'rose-pine', opts = { styles = { italic = false } } },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
