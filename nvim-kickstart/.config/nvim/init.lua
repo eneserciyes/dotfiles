@@ -604,13 +604,14 @@ require('lazy').setup({
     end,
   },
 
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
-  { 'folke/tokyonight.nvim', lazy = false, priority = 1000, opts = {} },
-  { 'neanias/everforest-nvim', version = false, lazy = false, priority = 1000 },
-  { 'shaunsingh/nord.nvim', priority = 1000, lazy = false },
-  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
-  { 'rebelot/kanagawa.nvim', priority = 1000, lazy = false },
-  { 'rose-pine/neovim', priority = 1000, lazy = false, name = 'rose-pine', opts = { styles = { italic = false } } },
+  -- Colorschemes
+  { 'catppuccin/nvim', name = 'catppuccin', lazy = true, priority = 1000 },
+  { 'folke/tokyonight.nvim', lazy = true, priority = 1000, opts = {} },
+  { 'neanias/everforest-nvim', version = false, lazy = true, priority = 1000 },
+  { 'shaunsingh/nord.nvim', priority = 1000, lazy = true },
+  { 'ellisonleao/gruvbox.nvim', priority = 1000, lazy = true, config = true },
+  { 'rebelot/kanagawa.nvim', priority = 1000, lazy = true },
+  { 'rose-pine/neovim', priority = 1000, lazy = true, name = 'rose-pine', opts = { styles = { italic = false } } },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -665,6 +666,7 @@ require('lazy').setup({
 
   {
     'tpope/vim-fugitive',
+    lazy = true,
     config = function()
       vim.keymap.set('n', '<leader>gs', function()
         vim.cmd.vsplit()
@@ -675,6 +677,7 @@ require('lazy').setup({
 
   {
     'theprimeagen/harpoon',
+    lazy = false,
     config = function()
       local mark = require 'harpoon.mark'
       local ui = require 'harpoon.ui'
@@ -699,9 +702,6 @@ require('lazy').setup({
 
   {
     'github/copilot.vim',
-    -- config = function()
-    -- vim.cmd [[ Copilot disable ]]
-    -- end,
   },
 
   -- Vim Tmux navigation
@@ -715,6 +715,28 @@ require('lazy').setup({
       vim.keymap.set('n', '<C-l>', '<cmd>TmuxNavigateRight<CR>', { silent = true })
     end,
   },
+
+  -- Bufferline
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   version = '*',
+  --   dependencies = 'nvim-tree/nvim-web-devicons',
+  --   config = function(_, _)
+  --     require('bufferline').setup {
+  --       options = {
+  --         mode = 'buffers',
+  --         offsets = {
+  --           {
+  --             filetype = 'NvimTree',
+  --             text = 'File Explorer',
+  --             text_align = 'left',
+  --             separator = true,
+  --           },
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 
   {
     'stevearc/oil.nvim',
@@ -741,33 +763,33 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'klafyvel/vim-slime-cells',
-    dependencies = { 'jpalardy/vim-slime' },
-    config = function()
-      vim.g.slime_target = 'tmux'
-      vim.g.slime_cell_delimiter = '# %%'
-      vim.g.slime_default_config = { socket_name = 'default', target_pane = '{last}' }
-      vim.g.slime_python_ipython = 1
-      vim.g.slime_dont_ask_default = 1
-      vim.cmd [[
-      nmap <leader>cv <Plug>SlimeConfig
-      nmap <leader>cc <Plug>SlimeCellsSendAndGoToNext
-      nmap <leader>cj <Plug>SlimeCellsNext
-      nmap <leader>ck <Plug>SlimeCellsPrev
-      ]]
-    end,
-  },
-
-  -- nvim tree
   -- {
-  --   'nvim-tree/nvim-tree.lua',
-  --   lazy = false,
+  --   'klafyvel/vim-slime-cells',
+  --   dependencies = { 'jpalardy/vim-slime' },
   --   config = function()
-  --     require('nvim-tree').setup()
-  --     vim.keymap.set('n', '<c-n>', '<CMD>NvimTreeToggle<CR>', { desc = 'Toggle NvimTree' })
+  --     vim.g.slime_target = 'tmux'
+  --     vim.g.slime_cell_delimiter = '# %%'
+  --     vim.g.slime_default_config = { socket_name = 'default', target_pane = '{last}' }
+  --     vim.g.slime_python_ipython = 1
+  --     vim.g.slime_dont_ask_default = 1
+  --     vim.cmd [[
+  --     nmap <leader>cv <Plug>SlimeConfig
+  --     nmap <leader>cc <Plug>SlimeCellsSendAndGoToNext
+  --     nmap <leader>cj <Plug>SlimeCellsNext
+  --     nmap <leader>ck <Plug>SlimeCellsPrev
+  --     ]]
   --   end,
   -- },
+
+  -- nvim tree
+  {
+    'nvim-tree/nvim-tree.lua',
+    lazy = false,
+    config = function()
+      require('nvim-tree').setup()
+      vim.keymap.set('n', '<c-n>', '<CMD>NvimTreeToggle<CR>', { desc = 'Toggle NvimTree' })
+    end,
+  },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

@@ -12,5 +12,7 @@ config.color_scheme = "Tokyo Night"
 config.font = wezterm.font("CaskaydiaMono Nerd Font")
 config.font_size = 12
 
+config.audible_bell = "Disabled"
+
 -- and finally, return the configuration to wezterm
 return config
