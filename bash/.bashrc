@@ -9,7 +9,8 @@ export PATH="/usr/local/cuda/bin":$PATH
 export CUDA_HOME="/usr/local/cuda"
 
 export PATH="/home/enes/.local/scripts/":$PATH
-
+# tmux sessionizer keyboard shortcut -> C-F
+bind -x '"\C-f": tmux-sessionizer'
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 
