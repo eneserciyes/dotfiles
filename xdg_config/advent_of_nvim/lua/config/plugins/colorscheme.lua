@@ -1,14 +1,17 @@
-return { 
-    { "rose-pine/neovim", lazy = false, priority = 1000, 
+return {
+  {
+    "rose-pine/neovim",
+    lazy = false,
+    priority = 1000,
     opts = {
-	styles = {
-	    bold = true,
-	    italic = false,
-	    transparency = false,
-	},
-    }, 
-    config = function(_, opts) 
-	require('rose-pine').setup(opts)
-	vim.cmd.colorscheme "rose-pine" 
+      styles = {
+        bold = true,
+        italic = false,
+        transparency = false,
+      },
+    },
+    config = function(_, opts)
+      require('rose-pine').setup(opts)
+      vim.cmd.colorscheme "rose-pine"
     end
-}}
+  } }

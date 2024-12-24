@@ -2,3 +2,4 @@
 packer_compiled.lua
 .zcompdump
 .zsh_history
+.zsh_sessions/

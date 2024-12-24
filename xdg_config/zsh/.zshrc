@@ -1,15 +1,22 @@
 # My "Plugins"
 sources=(
-  # 'autojump'
   'aliases'
+  'env-vars'
   'functions'
   'git'
-  # 'pyenv'
 )
 
 for s in "${sources[@]}"; do
   source $HOME/.config/zsh/include/${s}.zsh
 done
+
+
+# History
+SAVEHIST=1000
+HISTSIZE=999
+
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
