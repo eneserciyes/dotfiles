@@ -4,7 +4,7 @@ local config = wezterm.config_builder()
 
 config.font_size = 14
 config.window_decorations = "RESIZE"
-config.color_scheme = 'rose-pine'
+config.color_scheme = 'rose-pine-moon'
 config.audible_bell = 'Disabled'
 
 config.enable_scroll_bar = false

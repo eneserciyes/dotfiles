@@ -43,7 +43,7 @@ local function create_floating_window(opts)
   return { buf = buf, win = win }
 end
 
-vim.api.nvim_create_user_command("Floaterminal", function()
+local toggle_terminal = function()
   if not vim.api.nvim_win_is_valid(state.floating.win) then
     state.floating = create_floating_window { buf = state.floating.buf }
 
@@ -53,4 +53,7 @@ vim.api.nvim_create_user_command("Floaterminal", function()
   else
     vim.api.nvim_win_hide(state.floating.win)
   end
-end, {})
+end
+
+vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
+vim.keymap.set({ "n", "t" }, "<space>tt", toggle_terminal)

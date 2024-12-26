@@ -10,7 +10,6 @@ for s in "${sources[@]}"; do
   source $HOME/.config/zsh/include/${s}.zsh
 done
 
-
 # History
 SAVEHIST=1000
 HISTSIZE=999
@@ -38,6 +37,6 @@ fi
 # <<< conda initialize <<<
 
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
