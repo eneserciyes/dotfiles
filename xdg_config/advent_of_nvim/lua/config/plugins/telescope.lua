@@ -10,8 +10,13 @@ return {
       pickers = {
         find_files = { theme = "ivy" },
         git_files = { theme = "ivy" }
+      },
+      extensions = {
+        fzf = {}
       }
     }
+
+    require('telescope').load_extension('fzf')
 
     vim.keymap.set("n", "<leader>fh", require('telescope.builtin').help_tags)
     vim.keymap.set("n", "<leader>ff", require('telescope.builtin').find_files)
@@ -25,6 +30,9 @@ return {
     vim.keymap.set("n", "<C-p>", require('telescope.builtin').git_files)
 
     -- lsp
-    vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references)
+    -- vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references)
+
+    -- multi-grep
+    require("config.telescope.multigrep").setup()
   end
 }
