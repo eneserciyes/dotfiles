@@ -1,7 +1,11 @@
 .DS_Store
 packer_compiled.lua
-.zcompdump
+.zcompdump*
 .zsh_history
 .zsh_sessions/
 xdg_config/github-copilot/
 xdg_config/tmux/plugins/
+iterm2/
+mujoco-viewer/
+zed/
+zed/
