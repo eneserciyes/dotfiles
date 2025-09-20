@@ -1,14 +1,22 @@
 theme = TokyoNight
-font-family = CaskaydiaMono Nerd Font Mono
-font-size = 14
-keybind=super+ctrl+h=goto_split:left
-keybind=super+ctrl+l=goto_split:right
-keybind=super+ctrl+k=goto_split:up
-keybind=super+ctrl+j=goto_split:down
-keybind=super+ctrl+enter=toggle_split_zoom
+config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
 
-keybind=super+alt+h=resize_split:left,10
-keybind=super+alt+l=resize_split:right,10
-keybind=super+alt+k=resize_split:up,10
-keybind=super+alt+j=resize_split:down,10
+# Font
+font-family = "CaskaydiaMono Nerd Font"
+font-style = Regular
+font-size = 14
+
+# Window
+window-padding-x = 14
+window-padding-y = 14
+confirm-close-surface=false
+resize-overlay = never
+
+# Cursor stlying
+cursor-style = "block"
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+# Keyboard bindings
+keybind = f11=toggle_fullscreen
 
