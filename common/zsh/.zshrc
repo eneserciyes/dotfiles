@@ -33,17 +33,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias s='source ~/.zshrc'
 alias ez='nvim ~/.zshrc'
-alias ws='cd ~/ws/'
-alias work='cd ~/work/'
-alias personal='cd ~/personal/'
-alias ls='eza -lh --group-directories-first --no-permissions'
-alias diskspace="du -S | sort -n -r |more"
-alias cat='bat'
-alias htop='btop'
-alias top='btop'
-alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn" # show size sort folders
-alias c="clear"
-alias conda_activate="source ~/miniforge3/bin/activate"
+source ~/.alias
 
 export PYTHONBREAKPOINT=ipdb.set_trace
 
