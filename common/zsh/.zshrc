@@ -41,27 +41,32 @@ alias diskspace="du -S | sort -n -r |more"
 alias cat='bat'
 alias htop='btop'
 alias top='btop'
-
-# Show me the size (sorted) of only the folders in this directory
-alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
+alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn" # show size sort folders
+alias c="clear"
+alias conda_activate="source ~/miniforge3/bin/activate"
 
 export PYTHONBREAKPOINT=ipdb.set_trace
 
+# Nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 # # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/enes/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/enes/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/enes/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/enes/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/Users/enes/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/Users/enes/miniforge3/etc/profile.d/mamba.sh"
-fi
+# __conda_setup="$('/Users/enes/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/enes/miniforge3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/enes/miniforge3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/enes/miniforge3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+#
+# if [ -f "/Users/enes/miniforge3/etc/profile.d/mamba.sh" ]; then
+#     . "/Users/enes/miniforge3/etc/profile.d/mamba.sh"
+# fi
 # # <<< conda initialize <<<
+# export PATH="$HOME/.local/bin:$PATH"
