@@ -1,4 +1,4 @@
-theme = dark:catppuccin-frappe,light:catppuccin-latte
+theme = TokyoNight
 keybind=super+ctrl+h=goto_split:left
 keybind=super+ctrl+l=goto_split:right
 keybind=super+ctrl+k=goto_split:up
