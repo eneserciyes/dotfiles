@@ -1,0 +1,91 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.minimap.enabled": false,
+    "git.ignoreMissingGitWarning": true,
+    "editor.occurrencesHighlight": "off",
+    "editor.selectionHighlight": false,
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.tabCompletion": "on",
+    "editor.quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
+    "files.trimTrailingWhitespace": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "always",
+    "explorer.confirmDelete": false,
+    "extensions.ignoreRecommendations": true,
+    "window.titleBarStyle": "custom",
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "terminal.integrated.inheritEnv": false,
+    "git.enableSmartCommit": true,
+    "vim.handleKeys": {
+        "<C-p>": false,
+        "<C-d>": true,
+        "<C-s>": false,
+        "<C-f>": false,
+        "<C-z>": false,
+        "<C-b>": false,
+        "<C-r>": false,
+        "<C-i>": false,
+        "<tab>": false
+    },
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "g",
+                "r"
+            ],
+            "commands": [
+                "editor.action.goToReferences"
+            ]
+        }
+    ],
+    "editor.semanticHighlighting.enabled": true,
+    "python.languageServer": "None",
+    "window.customTitleBarVisibility": "auto",
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "explorer.confirmDragAndDrop": false,
+    "editor.lineNumbers": "relative",
+    "files.readonlyInclude": {
+        "**/.cargo/registry/src/**/*.rs": true,
+        "**/lib/rustlib/src/rust/library/**/*.rs": true
+    },
+    "redhat.telemetry.enabled": false,
+    "terminal.external.osxExec": "Ghostty.app",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "diffEditor.ignoreTrimWhitespace": true,
+    "editor.fontSize": 12,
+    "files.associations": {
+        "*.mjcf": "xml",
+        "*.urdf": "xml"
+    },
+    "editor.fontFamily": "'CaskaydiaMono Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "cursor.cpp.disabledLanguages": [
+        "plaintext",
+        "markdown",
+        "scminput"
+    ],
+    "remote.SSH.remotePlatform": {
+        "dexmate": "linux",
+        "dexmate-hotspot": "linux"
+    },
+    "remote.autoForwardPortsSource": "hybrid",
+    "workbench.colorTheme": "Monokai",
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    }
+}
