@@ -10,9 +10,9 @@ if ! command -v npm &> /dev/null; then
 fi
 
 echo "Installing claude-code..."
-npm install -g @anthropic-ai/claude-code
+sudo npm install -g @anthropic-ai/claude-code
 
 echo "Installing codex..."
-npm install -g @openai/codex
+sudo npm install -g @openai/codex
 
 echo "AI tools installed successfully!"
