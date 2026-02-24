@@ -2,22 +2,31 @@
 
 set -e
 
-echo "Installing Neovim from source..."
+echo "Installing Neovim..."
 
-BUILD_DIR=$(mktemp -d)
-git clone --branch stable https://github.com/neovim/neovim "$BUILD_DIR/neovim"
-cd "$BUILD_DIR/neovim"
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
-cd /
-rm -rf "$BUILD_DIR"
+if command -v nvim &> /dev/null; then
+    echo "Neovim is already installed: $(nvim --version | head -1)"
+else
+    ARCH=$(uname -m)
+    case "$ARCH" in
+        x86_64) NVIM_ARCH="x86_64" ;;
+        aarch64|arm64) NVIM_ARCH="arm64" ;;
+        *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
+    esac
 
-if ! command -v nvim &> /dev/null; then
-    echo "Neovim installation failed"
-    exit 1
+    TEMP_DIR=$(mktemp -d)
+    curl -Lo "$TEMP_DIR/nvim.tar.gz" "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-${NVIM_ARCH}.tar.gz"
+    sudo tar xzf "$TEMP_DIR/nvim.tar.gz" -C /opt
+    sudo ln -sf /opt/nvim-linux-${NVIM_ARCH}/bin/nvim /usr/local/bin/nvim
+    rm -rf "$TEMP_DIR"
+
+    if ! command -v nvim &> /dev/null; then
+        echo "Neovim installation failed"
+        exit 1
+    fi
+
+    echo "Neovim $(nvim --version | head -1) installed successfully!"
 fi
-
-echo "Neovim $(nvim --version | head -1) installed successfully!"
 
 # Backup existing Neovim config if it exists
 NVIM_CONFIG_DIR="$HOME/.config/nvim"

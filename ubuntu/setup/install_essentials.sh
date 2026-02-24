@@ -15,8 +15,6 @@ sudo apt install -y \
     unzip \
     software-properties-common \
     ca-certificates \
-    gnupg \
-    cmake \
-    gettext
+    gnupg
 
 echo "Essential packages installed successfully!"
