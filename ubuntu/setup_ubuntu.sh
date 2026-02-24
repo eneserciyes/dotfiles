@@ -43,6 +43,7 @@ rm -f ~/.alias
 rm -f ~/.bashrc
 rm -rf ~/.config/ghostty
 rm -rf ~/.config/tmux
+rm -f ~/.ssh/config
 
 # Stow common configs
 cd "$DOTFILES_DIR/common"
@@ -51,6 +52,7 @@ stow -t ~ alias
 stow -t ~ nvim
 stow -t ~ tmux
 stow -t ~ ghostty
+stow -t ~ ssh
 
 # Stow ubuntu-specific configs (overrides common)
 cd "$DOTFILES_DIR/ubuntu"
