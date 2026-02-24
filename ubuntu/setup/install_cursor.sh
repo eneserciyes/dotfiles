@@ -9,26 +9,14 @@ if command -v cursor &> /dev/null; then
     exit 0
 fi
 
-TEMP_DIR=$(mktemp -d)
-curl -L -o "$TEMP_DIR/cursor.appimage" "https://www.cursor.com/api/download?platform=linux-x64&releaseTrack=stable"
-chmod +x "$TEMP_DIR/cursor.appimage"
+# Add Cursor GPG key
+curl -fsSL https://downloads.cursor.com/keys/anysphere.asc | sudo gpg --dearmor -o /etc/apt/keyrings/cursor.gpg
 
-mkdir -p ~/.local/bin
-mv "$TEMP_DIR/cursor.appimage" ~/.local/bin/cursor
-rm -rf "$TEMP_DIR"
+# Add Cursor apt repository
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/cursor.gpg] https://downloads.cursor.com/aptrepo stable main" | sudo tee /etc/apt/sources.list.d/cursor.list > /dev/null
 
-# Create desktop entry
-mkdir -p ~/.local/share/applications
-cat > ~/.local/share/applications/cursor.desktop << 'EOF'
-[Desktop Entry]
-Name=Cursor
-Exec=cursor --no-sandbox %F
-Type=Application
-Icon=cursor
-Categories=Development;IDE;
-MimeType=text/plain;
-StartupWMClass=Cursor
-EOF
+# Install Cursor
+sudo apt update
+sudo apt install -y cursor
 
 echo "Cursor installed successfully!"
-echo "Run 'cursor' to launch."
