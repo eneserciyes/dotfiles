@@ -1,10 +1,11 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 echo "Installing essential packages..."
 
-sudo apt update && sudo apt upgrade -y
+sudo apt update
+sudo apt upgrade -y
 
 sudo apt install -y \
     build-essential \
@@ -13,8 +14,13 @@ sudo apt install -y \
     git \
     stow \
     unzip \
+    python3 \
+    python3-venv \
+    python3-pip \
     software-properties-common \
     ca-certificates \
-    gnupg
+    gnupg \
+    apt-transport-https \
+    bash-completion
 
 echo "Essential packages installed successfully!"

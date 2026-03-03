@@ -1,61 +1,58 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-echo "Installing TUI tools..."
+echo "Installing TUI tools (lazygit, lazydocker, btop)..."
 
-# fzf, ripgrep, btop from default repos
-echo "Installing fzf, ripgrep, btop..."
-sudo apt install -y fzf ripgrep btop
+sudo apt install -y btop
 
-# fd-find (installs as fdfind, needs symlink)
-echo "Installing fd-find..."
-sudo apt install -y fd-find
-mkdir -p ~/.local/bin
-if [ ! -e ~/.local/bin/fd ]; then
-    ln -s "$(which fdfind)" ~/.local/bin/fd
-fi
+install_lazygit() {
+    if command -v lazygit &> /dev/null; then
+        echo "lazygit already installed."
+        return
+    fi
 
-# bat (installs as batcat, needs symlink)
-echo "Installing bat..."
-sudo apt install -y bat
-if [ ! -e ~/.local/bin/bat ]; then
-    ln -s "$(which batcat)" ~/.local/bin/bat
-fi
-
-# eza via apt repo
-echo "Installing eza..."
-if ! command -v eza &> /dev/null; then
-    sudo mkdir -p /etc/apt/keyrings
-    wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
-    sudo chmod 644 /etc/apt/keyrings/gierens.gpg
-    sudo chmod 644 /etc/apt/sources.list.d/gierens.list
-    sudo apt update
-    sudo apt install -y eza
-fi
-
-# zoxide via install script
-echo "Installing zoxide..."
-if ! command -v zoxide &> /dev/null; then
-    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-fi
-
-# lazygit from GitHub releases
-echo "Installing lazygit..."
-if ! command -v lazygit &> /dev/null; then
-    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    ARCH=$(uname -m)
-    case "$ARCH" in
-        x86_64) LAZYGIT_ARCH="x86_64" ;;
-        aarch64|arm64) LAZYGIT_ARCH="arm64" ;;
-        *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
+    local version arch temp_dir
+    version="$(curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep -Po '"tag_name": "v\K[^"]*')"
+    arch="$(uname -m)"
+    case "$arch" in
+        x86_64) arch="x86_64" ;;
+        aarch64|arm64) arch="arm64" ;;
+        *) echo "Unsupported architecture for lazygit: $arch"; exit 1 ;;
     esac
-    TEMP_DIR=$(mktemp -d)
-    curl -Lo "$TEMP_DIR/lazygit.tar.gz" "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_${LAZYGIT_ARCH}.tar.gz"
-    tar xf "$TEMP_DIR/lazygit.tar.gz" -C "$TEMP_DIR"
-    sudo install "$TEMP_DIR/lazygit" /usr/local/bin
-    rm -rf "$TEMP_DIR"
-fi
+
+    temp_dir="$(mktemp -d)"
+    curl -Lo "$temp_dir/lazygit.tar.gz" "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${version}_Linux_${arch}.tar.gz"
+    tar xf "$temp_dir/lazygit.tar.gz" -C "$temp_dir"
+    sudo install "$temp_dir/lazygit" /usr/local/bin
+    rm -rf "$temp_dir"
+    echo "lazygit installed."
+}
+
+install_lazydocker() {
+    if command -v lazydocker &> /dev/null; then
+        echo "lazydocker already installed."
+        return
+    fi
+
+    local version arch temp_dir
+    version="$(curl -s https://api.github.com/repos/jesseduffield/lazydocker/releases/latest | grep -Po '"tag_name": "v\K[^"]*')"
+    arch="$(uname -m)"
+    case "$arch" in
+        x86_64) arch="x86_64" ;;
+        aarch64|arm64) arch="arm64" ;;
+        *) echo "Unsupported architecture for lazydocker: $arch"; exit 1 ;;
+    esac
+
+    temp_dir="$(mktemp -d)"
+    curl -Lo "$temp_dir/lazydocker.tar.gz" "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${version}_Linux_${arch}.tar.gz"
+    tar xf "$temp_dir/lazydocker.tar.gz" -C "$temp_dir"
+    sudo install "$temp_dir/lazydocker" /usr/local/bin
+    rm -rf "$temp_dir"
+    echo "lazydocker installed."
+}
+
+install_lazygit
+install_lazydocker
 
 echo "TUI tools installed successfully!"

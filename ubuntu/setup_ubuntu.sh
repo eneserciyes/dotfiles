@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SETUP_DIR="$DOTFILES_DIR/ubuntu/setup"
@@ -12,46 +12,54 @@ echo ""
 echo "Dotfiles directory: $DOTFILES_DIR"
 echo ""
 
-# Phase 1: Essentials + Node.js
-echo "--- Phase 1: Essentials + Node.js ---"
+# Phase 1: Base packages and prerequisites
+echo "--- Phase 1: Essentials ---"
 bash "$SETUP_DIR/install_essentials.sh"
-bash "$SETUP_DIR/install_node.sh"
 
-# Phase 2: Dev tools (independent of each other)
-echo "--- Phase 2: Dev Tools ---"
-bash "$SETUP_DIR/install_neovim.sh"
-bash "$SETUP_DIR/install_tmux.sh"
-bash "$SETUP_DIR/install_tuis.sh"
-bash "$SETUP_DIR/install_gh.sh"
+# Phase 2: Desktop apps
+echo "--- Phase 2: Desktop Apps ---"
+bash "$SETUP_DIR/install_desktop_apps.sh"
+
+# Phase 3: Shell tools, prompt, fonts
+echo "--- Phase 3: Shell + Prompt + Fonts ---"
+bash "$SETUP_DIR/install_shell_tools.sh"
 bash "$SETUP_DIR/install_fonts.sh"
-bash "$SETUP_DIR/install_cursor.sh"
 
-# Phase 3: AI tools (depends on Node.js)
-echo "--- Phase 3: AI Tools ---"
+# Phase 4: Development toolchain
+echo "--- Phase 4: Development Tools ---"
+bash "$SETUP_DIR/install_dev_tools.sh"
+bash "$SETUP_DIR/install_gh.sh"
+bash "$SETUP_DIR/install_tailscale.sh"
+
+# Phase 5: Neovim
+echo "--- Phase 5: Neovim ---"
+bash "$SETUP_DIR/install_neovim.sh"
+
+# Phase 6: TUIs and AI CLIs
+echo "--- Phase 6: TUIs + AI ---"
+bash "$SETUP_DIR/install_tuis.sh"
 bash "$SETUP_DIR/install_ai_tools.sh"
+bash "$SETUP_DIR/install_tmux.sh"
 
-# Phase 4: Keyboard remap
-echo "--- Phase 4: Keyboard ---"
-bash "$SETUP_DIR/install_capslock_ctrl.sh"
-
-# Phase 5: Stow configs
-echo "--- Phase 5: Stow Configs ---"
+# Phase 7: Stow configs
+echo "--- Phase 7: Stow Configs ---"
 
 # Remove conflicting files
 rm -f ~/.gitconfig
 rm -f ~/.alias
 rm -f ~/.bashrc
-rm -rf ~/.config/ghostty
 rm -rf ~/.config/tmux
+rm -rf ~/.config/alacritty
+rm -rf ~/.config/Cursor/User
 rm -f ~/.ssh/config
 
 # Stow common configs
 cd "$DOTFILES_DIR/common"
 stow -t ~ git
 stow -t ~ alias
-stow -t ~ nvim
 stow -t ~ tmux
-stow -t ~ ghostty
+stow -t ~ alacritty
+stow -t ~ cursor
 stow -t ~ ssh
 
 # Stow ubuntu-specific configs (overrides common)
@@ -65,8 +73,8 @@ echo "========================================="
 echo ""
 echo "Next steps:"
 echo "  1. source ~/.bashrc"
-echo "  2. Open nvim - LazyVim will install plugins on first run"
+echo "  2. Open Cursor and verify JetBrains Mono font"
 echo "  3. In tmux, press prefix + I to install plugins"
-echo "  4. Run 'gh auth login' to authenticate GitHub CLI"
-echo "  5. Run 'claude' to authenticate Claude Code"
-echo "  6. Log out and back in for Caps Lock -> Ctrl to take effect"
+echo "  4. Run 'gh auth login'"
+echo "  5. Run 'claude' and 'codex' to authenticate"
+echo "  6. Run 'newgrp docker' (or log out/in) for docker group changes"

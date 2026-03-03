@@ -1,8 +1,13 @@
-# If not running interactively, don't do anything
+# If not running interactively, do nothing
 case $- in
     *i*) ;;
       *) return;;
 esac
+
+# Load Ubuntu's default global bashrc first.
+if [ -f /etc/bash.bashrc ]; then
+    . /etc/bash.bashrc
+fi
 
 # History
 HISTSIZE=10000
@@ -11,16 +16,11 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # PATH
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export EDITOR=nvim
 
 # Aliases
 source ~/.alias
-
-# Zoxide
-eval "$(zoxide init bash)"
-
-# Python
-export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Bash completion
 if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -29,5 +29,24 @@ elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# Prompt
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# zoxide
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init bash)"
+fi
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    . "$NVM_DIR/nvm.sh"
+fi
+if [ -s "$NVM_DIR/bash_completion" ]; then
+    . "$NVM_DIR/bash_completion"
+fi
+
+# Python
+export PYTHONBREAKPOINT=ipdb.set_trace
+
+# starship prompt
+if command -v starship &> /dev/null; then
+    eval "$(starship init bash)"
+fi

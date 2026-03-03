@@ -9,3 +9,6 @@ iterm2/
 mujoco-viewer/
 zed/
 zed/
+common/cursor/.config/Cursor/User/globalStorage/
+common/cursor/.config/Cursor/User/workspaceStorage/
+*.bak
