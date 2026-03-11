@@ -5,4 +5,5 @@ raycast/
 .zsh_history.new
 .zsh_history.new
 .zsh_sessions
+nvim/nvim-pack-lock.json
 gh/
