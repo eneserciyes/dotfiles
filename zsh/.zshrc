@@ -35,6 +35,7 @@ alias ta="tmux attach"
 alias cd-w="cd ${GG_WS}"
 alias cd-a="cd ${GG_AP}"
 alias cd-d="cd ${GG_DO}"
+alias chx="chmod +x"
 alias nm="neomutt"
 alias ls="ls -C -t -U -A -p --color=auto" 
 

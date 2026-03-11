@@ -32,7 +32,6 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 })
 
@@ -42,10 +41,6 @@ vim.cmd('colorscheme vague')
 require("mason").setup()
 require("mini.pick").setup()
 require("oil").setup()
-require("nvim-treesitter.config").setup({
-	ensure_installed = { "python", "lua" },
-	highlight = { enable = true }
-})
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
