@@ -2,6 +2,13 @@ bindkey -e
 PS1="%{$fg[red]%}%m%{$reset_color%}:%{$fg[magenta]%}%~%{$fg[red]%} %{$reset_color%}$%b "
 source <(fzf --zsh)
 
+if [[ "$(uname)" == "Darwin" ]]; then
+	MAC=1
+else
+	LINUX=1
+fi
+
+
 finder() {
     open .
 }
@@ -13,8 +20,8 @@ zle -N finder
 bindkey '^f' finder
 
 
-export PATH="/Users/$USER/.local/bin:$PATH"
-export PATH="/Users/$USER/.local/share/bob/nvim-bin/:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/share/bob/nvim-bin/:$PATH"
 
 export GG_WS="$HOME/ws/"
 export GG_AP="$HOME/ws/ari-pilot"
@@ -50,4 +57,4 @@ export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -s /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+[[ $LINUX ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
