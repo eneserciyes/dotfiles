@@ -19,6 +19,16 @@ finder() {
 mkcd() {
   mkdir -p "$1" && cd "$1"
 }
+tcc() {
+	local panes=$(tmux display-message -p '#{window_panes}')
+	[[ $panes -gt 1 ]] && echo "more than 1 pane" && return 0
+	tmux split-window -v -p 20
+	tmux select-pane -t 0
+	tmux split-window -h -p 30
+	tmux send-keys -t 0 'nvim .' Enter
+	tmux send-keys -t 1 'claude' Enter
+	tmux select-pane -t 0
+}
 
 zle -N finder
 bindkey '^f' finder
