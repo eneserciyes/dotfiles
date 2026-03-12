@@ -1,5 +1,6 @@
 bindkey -e
-PS1="%{$fg[red]%}%m%{$reset_color%}:%{$fg[magenta]%}%~%{$fg[red]%} %{$reset_color%}$%b "
+autoload -U colors && colors
+PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%} $ "
 source <(fzf --zsh)
 
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -44,9 +45,12 @@ alias cd-a="cd ${GG_AP}"
 alias cd-d="cd ${GG_DO}"
 alias chx="chmod +x"
 alias ls="ls -C -t -U -A -p --color=auto" 
+alias ga="git add -u"
+alias gaa="git add -A"
+alias gc="git commit -m"
+alias gs="git status"
 
 autoload -U compinit && compinit
-autoload -U colors && colors
 autoload edit-command-line
 zmodload zsh/complist
 zle -N edit-command-line

@@ -1,0 +1,1 @@
+- ZDOTDIR=~/.config/zsh, so zshrc is inside this repo in zsh/.zshrc. NOT in ~/.zshrc!
