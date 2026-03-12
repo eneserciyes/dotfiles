@@ -7,3 +7,17 @@ raycast/
 .zsh_sessions
 nvim/nvim-pack-lock.json
 gh/
+
+.gsd-keyboard.settings-ported
+dconf/
+evolution/
+gnome-initial-setup-done
+google-chrome/
+gtk-3.0/
+ibus/
+lazygit/
+mimeapps.list
+pulse/
+tiling-assistant/
+user-dirs.dirs
+user-dirs.locale
