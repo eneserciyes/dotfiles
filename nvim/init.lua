@@ -53,9 +53,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.cmd("set completeopt+=noselect")
 
 
-vim.lsp.enable({ "lua_ls", "basedpyright" })
+vim.lsp.enable({ "lua_ls", "basedpyright", "clangd" })
 
 map('n', '<leader>lf', vim.lsp.buf.format)
 map('n', '<leader>f', ':Pick files<CR>')
+map('n', '<leader>b', ':Pick buffers<CR>')
+map('n', '<leader>rg', ':Pick grep_live<CR>')
 map('n', '<leader>h', ':Pick help<CR>')
 map('n', '<leader>e', ':Oil<CR>')
