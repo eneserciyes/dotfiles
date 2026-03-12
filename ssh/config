@@ -1,0 +1,47 @@
+Host *
+  SetEnv TERM=xterm-256color
+	ConnectTimeout 5
+	ServerAliveInterval 30
+	ServerAliveCountMax 3
+	IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519
+  LogLevel ERROR
+	ControlPath ~/.ssh/sockets/%r@%h-%p
+	ControlPersist 600 # keep shared connection alive 10min after last session
+
+Host v1
+  HostName vega-1
+  User dexmate
+
+Host v3
+	HostName vega-3
+	User dexmate
+
+Host vu04
+  HostName vega-u04
+  User arijetson10
+
+Host vu03
+  HostName vega-u03
+  User arijetson9
+
+Host vu01
+  HostName vega-u01
+  User arijetson7
+
+Host g1-3
+  HostName g1-agx-orin-3
+  User arijetson3
+
+Host bee
+  HostName 100.104.32.64
+  User enes
+
+Host ws
+  HostName ari-12
+  User enes
+
+Host runpod
+  HostName 103.196.86.204
+  User root
+  Port 16912

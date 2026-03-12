@@ -1,6 +1,6 @@
-autoload -U colors && colors
 bindkey -e
 PS1="%{$fg[magenta]%}%~%{$fg[red]%} %{$reset_color%}$%b "
+source <(fzf --zsh)
 
 finder() {
     open .
@@ -10,8 +10,8 @@ mkcd() {
 }
 
 zle -N finder
-
 bindkey '^f' finder
+
 
 export PATH="/Users/$USER/.local/bin:$PATH"
 export PATH="/Users/$USER/.local/share/bob/nvim-bin/:$PATH"
@@ -36,15 +36,17 @@ alias cd-w="cd ${GG_WS}"
 alias cd-a="cd ${GG_AP}"
 alias cd-d="cd ${GG_DO}"
 alias chx="chmod +x"
-alias nm="neomutt"
 alias ls="ls -C -t -U -A -p --color=auto" 
 
+autoload -U compinit && compinit
+autoload -U colors && colors
+autoload edit-command-line
+zmodload zsh/complist
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
 
 export NVM_DIR=~/.nvm
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[[ -s /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
-
-
-
+[[ -s /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
