@@ -1,5 +1,5 @@
 bindkey -e
-PS1="%{$fg[magenta]%}%~%{$fg[red]%} %{$reset_color%}$%b "
+PS1="%{$fg[red]%}%m%{$reset_color%}:%{$fg[magenta]%}%~%{$fg[red]%} %{$reset_color%}$%b "
 source <(fzf --zsh)
 
 finder() {
