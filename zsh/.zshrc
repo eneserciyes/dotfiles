@@ -50,3 +50,4 @@ export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -s /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
