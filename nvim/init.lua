@@ -58,7 +58,7 @@ vim.cmd("set completeopt+=noselect")
 vim.lsp.enable({ "lua_ls", "basedpyright", "clangd" })
 
 map('n', '<leader>lf', vim.lsp.buf.format)
-map('n', '<leader>f', ':Pick files<CR>')
+map('n', '<leader>f', ':Pick files tool=\'git\'<CR>')
 map('n', '<leader>b', ':Pick buffers<CR>')
 map('n', '<leader>rg', ':Pick grep_live<CR>')
 map('n', '<leader>h', ':Pick help<CR>')
