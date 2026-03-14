@@ -33,6 +33,10 @@ tcc() {
 zle -N finder
 bindkey '^f' finder
 
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/bob/nvim-bin/:$PATH"
@@ -79,4 +83,5 @@ export NVM_DIR=~/.nvm
 [[ -s /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [[ $LINUX ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
 source <(fzf --zsh)

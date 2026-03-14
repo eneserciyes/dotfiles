@@ -12,6 +12,8 @@ vim.o.signcolumn = "yes"
 vim.o.undofile = true
 vim.o.incsearch = true
 vim.o.hlsearch = false
+vim.o.autoread = true
+vim.api.nvim_create_autocmd("FocusGained", { command = "checktime" }) -- reload buffer on focus
 
 local map = vim.keymap.set
 
@@ -55,7 +57,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.cmd("set completeopt+=noselect")
 
 
-vim.lsp.enable({ "lua_ls", "basedpyright", "clangd" })
+vim.lsp.enable({ "lua_ls", "basedpyright", "clangd", "ruff" })
 
 map('n', '<leader>lf', vim.lsp.buf.format)
 map('n', '<leader>f', ':Pick files tool=\'git\'<CR>')

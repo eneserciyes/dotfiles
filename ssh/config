@@ -29,18 +29,25 @@ Host vu01
   HostName vega-u01
   User arijetson7
 
-Host g1-3
-  HostName g1-agx-orin-3
-  User arijetson3
-
 Host bee
   HostName 100.104.32.64
   User enes
+
+Host g1-3
+  HostName g1-agx-orin-3
+  User arijetson3
 
 Host g1-9
 	HostName g1-agx-orin-9
 	User arijetson9
 
+Host g1-6
+	HostName g1-agx-orin-6
+	User arijetson6
+
+Host g1-8
+	HostName g1-agx-orin-8
+	User arijetson8
 Host g1-5
 	HostName g1-agx-orin-5
 	User arijetson5

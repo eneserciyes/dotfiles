@@ -1,1 +1,2 @@
 - ZDOTDIR=~/.config/zsh, so zshrc is inside this repo in zsh/.zshrc. NOT in ~/.zshrc!
+- tmux copy mode: `copy-selection` clears the selection but stays in copy mode. `copy-selection-and-cancel` copies and exits copy mode. They are NOT the same.
