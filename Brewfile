@@ -15,6 +15,7 @@ brew "zsh-syntax-highlighting"
 if OS.mac?
   cask "raycast"
   cask "sioyek"
+  cask "obsidian"
   brew "python@3.13", link: false
   brew "openssh"
   brew "pandoc"
