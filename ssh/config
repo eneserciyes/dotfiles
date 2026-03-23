@@ -33,9 +33,21 @@ Host bee
   HostName 100.104.32.64
   User enes
 
+Host g1-1
+  HostName g1-agx-orin-1
+  User arijetson1
+
+Host g1-2
+  HostName g1-agx-orin-2
+  User arijetson2
+
 Host g1-3
   HostName g1-agx-orin-3
   User arijetson3
+
+Host g1-4
+  HostName g1-agx-orin-4
+  User arijetson4
 
 Host g1-9
 	HostName g1-agx-orin-9
@@ -48,13 +60,26 @@ Host g1-6
 Host g1-8
 	HostName g1-agx-orin-8
 	User arijetson8
+
+Host g1-7
+	HostName g1-agx-orin-7
+	User arijetson
+
 Host g1-5
 	HostName g1-agx-orin-5
 	User arijetson5
 
+Host g1-10
+  HostName g1-agx-orin-10
+  User arijetson10
+
 Host ws
   HostName ari-12
   User enes
+
+Host bench
+	HostName test-bench
+	User arijetson8
 
 Host runpod
   HostName 103.196.86.204

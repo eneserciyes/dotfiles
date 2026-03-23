@@ -8,6 +8,8 @@ systemd/
 .zsh_sessions
 nvim/nvim-pack-lock.json
 gh/
+obsidian/
+eog/
 
 .gsd-keyboard.settings-ported
 dconf/
