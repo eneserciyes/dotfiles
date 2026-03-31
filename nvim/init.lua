@@ -84,7 +84,19 @@ vim.cmd("set completeopt+=menuone,noselect,popup")
 
 
 
-vim.lsp.enable({ "lua_ls", "basedpyright", "clangd", "ruff" })
+local lsp_servers = { "lua_ls", "basedpyright", "clangd", "ruff" }
+vim.lsp.enable(lsp_servers)
+
+map('n', '<leader>lt', function()
+	local clients = vim.lsp.get_clients()
+	if #clients > 0 then
+		vim.lsp.stop_client(clients)
+		print("LSP stopped")
+	else
+		vim.lsp.enable(lsp_servers)
+		print("LSP started")
+	end
+end)
 
 -- Mappings
 map('n', '<leader>lf', function()
