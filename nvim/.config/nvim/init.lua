@@ -1,3 +1,14 @@
+-- Disable unused built-in plugins.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_zip = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tohtml = 1
+vim.g.loaded_tutor = 1
+
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.ignorecase = true
@@ -13,6 +24,10 @@ vim.o.undofile = true
 vim.o.incsearch = true
 vim.o.hlsearch = false
 vim.o.autoread = true
+vim.o.timeoutlen = 200
+vim.o.ttimeoutlen = 10
+vim.o.mouse = ""
+vim.o.showmode = false
 vim.api.nvim_create_autocmd("FocusGained", { command = "checktime" }) -- reload buffer on focus
 
 local map = vim.keymap.set

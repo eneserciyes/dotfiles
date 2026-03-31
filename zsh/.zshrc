@@ -34,8 +34,8 @@ zle -N finder
 bindkey '^f' finder
 
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 setopt SHARE_HISTORY
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -64,7 +64,10 @@ alias cd-w="cd ${GG_WS}"
 alias cd-a="cd ${GG_AP}"
 alias cd-d="cd ${GG_DO}"
 alias chx="chmod +x"
-alias ls="ls -C -t -U -A -p --color=auto" 
+alias ls="ls --color=auto"
+alias ll="ls -alF"
+alias la="ls -A"
+alias l="ls -CF"
 alias ga="git add -u"
 alias gaa="git add -A"
 alias gc="git commit -m"
