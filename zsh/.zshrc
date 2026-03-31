@@ -50,7 +50,7 @@ export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 export HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd:vim'
 
-alias src="source ~/.config/zsh/.zshrc"
+alias src="source ~/.zshrc"
 alias venv="source .venv/bin/activate"
 alias c="claude"
 alias cr="claude --resume" 

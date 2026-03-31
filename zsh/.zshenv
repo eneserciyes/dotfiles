@@ -1,2 +1,1 @@
-ZDOTDIR=~/.config/zsh
 . "/Users/enes/.local/share/bob/env/env.sh"
