@@ -1,4 +1,4 @@
-STOW_DIR := $(HOME)/ws/dotfiles
+STOW_DIR := $(HOME)/ws/oh-my-dot
 PACKAGES := btop ghostty git nvim scripts sioyek ssh timewarrior tmux zsh
 
 .PHONY: stow unstow restow install
