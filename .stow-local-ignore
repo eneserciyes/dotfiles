@@ -6,3 +6,4 @@ Makefile
 settings\.sh
 \.stow-local-ignore
 ^\.git
+install

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+run() {
+    echo "=== $1 ==="
+    bash "$SCRIPT_DIR/$1"
+    echo
+}
+
+# APT packages
+run install-stow.sh
+run install-btop.sh
+run install-fd.sh
+run install-fzf.sh
+run install-ripgrep.sh
+run install-tmux.sh
+run install-wget.sh
+run install-timewarrior.sh
+run install-zsh-syntax-highlighting.sh
+
+# GitHub CLI (apt repo)
+run install-gh.sh
+
+# GitHub releases
+run install-lazygit.sh
+run install-sk.sh
+run install-hostess.sh
+
+# Font
+run install-jetbrains-mono-nerd-font.sh
+
+# Node ecosystem (order matters)
+run install-node.sh
+run install-tree-sitter-cli.sh
+
+echo "=== All done! ==="
