@@ -40,6 +40,7 @@ vim.pack.add({
 	{ src = "https://github.com/vague-theme/vague.nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
+	{ src = "https://github.com/nvim-mini/mini.extra" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
@@ -51,6 +52,7 @@ vim.cmd('colorscheme vague')
 
 require("mason").setup()
 require("mini.pick").setup()
+require("mini.extra").setup()
 require("oil").setup(
 	{
 		lsp_file_methods = {
@@ -122,6 +124,7 @@ map('n', '<leader>f', ':Pick files tool=\'git\'<CR>')
 map('n', '<leader>b', ':Pick buffers<CR>')
 map('n', '<leader>rg', ':Pick grep_live<CR>')
 map('n', '<leader>h', ':Pick help<CR>')
+map('n', '<leader>k', ':Pick keymaps<CR>')
 map('n', '<leader>e', ':Oil<CR>')
 
 map('n', '<leader>o', ':update<CR> :source<CR>')

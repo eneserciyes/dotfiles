@@ -31,6 +31,9 @@ run install-hostess.sh
 # Font
 run install-jetbrains-mono-nerd-font.sh
 
+# Python ecosystem
+run install-uv.sh
+
 # Node ecosystem (order matters)
 run install-node.sh
 run install-tree-sitter-cli.sh
