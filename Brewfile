@@ -1,4 +1,5 @@
 brew "btop"
+brew "stow"
 brew "fd"
 brew "fzf"
 brew "gh"

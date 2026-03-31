@@ -1,2 +1,5 @@
-- ZDOTDIR=~/.config/zsh, so zshrc is inside this repo in zsh/.zshrc. NOT in ~/.zshrc!
+- Dotfiles repo lives at ~/ws/dotfiles, managed with GNU stow
+- ZDOTDIR=~/.config/zsh, so zshrc is stowed to ~/.config/zsh/.zshrc. NOT ~/.zshrc!
+- Scripts are stowed to ~/.local/scripts/ (in PATH via .zshrc)
+- To apply changes after editing: cd ~/ws/dotfiles && make restow
 - tmux copy mode: `copy-selection` clears the selection but stays in copy mode. `copy-selection-and-cancel` copies and exits copy mode. They are NOT the same.

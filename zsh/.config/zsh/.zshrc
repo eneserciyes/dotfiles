@@ -40,6 +40,7 @@ setopt SHARE_HISTORY
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/bob/nvim-bin/:$PATH"
+export PATH="$HOME/.local/scripts:$PATH"
 
 export GG_WS="$HOME/ws/"
 export GG_AP="$HOME/ws/ari-pilot"
