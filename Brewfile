@@ -14,6 +14,7 @@ brew "wget"
 brew "zsh-syntax-highlighting"
 
 if OS.mac?
+  cask "font-jetbrains-mono-nerd-font"
   cask "raycast"
   cask "sioyek"
   cask "obsidian"

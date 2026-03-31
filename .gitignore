@@ -10,6 +10,7 @@ nvim/nvim-pack-lock.json
 gh/
 obsidian/
 eog/
+uv/
 
 .gsd-keyboard.settings-ported
 dconf/
