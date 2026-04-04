@@ -48,6 +48,7 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/akinsho/git-conflict.nvim" },
 	{ src = "https://github.com/NMAC427/guess-indent.nvim" },
+	{ src = "https://github.com/saghen/blink.cmp" },
 })
 
 require("vague").setup({ transparent = true })
@@ -108,12 +109,49 @@ require("gitsigns").setup()
 require("git-conflict").setup()
 require("guess-indent").setup()
 
+require("blink.cmp").setup({
+	keymap = {
+		preset = "none",
+		["<C-b>"] = { "scroll_documentation_up" },
+		["<C-f>"] = { "scroll_documentation_down" },
+		["<C-n>"] = { "show" },
+		["<CR>"] = { "accept", "fallback" },
+		["<Tab>"] = { "select_next", "fallback" },
+		["<S-Tab>"] = { "select_prev", "fallback" },
+	},
+	completion = {
+		list = {
+			selection = { preselect = false, auto_insert = false },
+		},
+		menu = { border = "rounded" },
+		documentation = {
+			auto_show = true,
+			window = { border = "rounded" },
+		},
+	},
+	sources = {
+		default = { "lsp", "path", "buffer" },
+		per_filetype = {
+			gitcommit = { "buffer" },
+		},
+	},
+	cmdline = {
+		sources = function()
+			local type = vim.fn.getcmdtype()
+			if type == "/" or type == "?" then
+				return { "buffer" }
+			end
+			if type == ":" then
+				return { "cmdline", "path" }
+			end
+			return {}
+		end,
+	},
+	signature = { enabled = true },
+})
+
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
-		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-		if client:supports_method('textDocument/completion') then
-			vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-		end
 		local opts = { buffer = args.buf }
 		map('n', 'gd', vim.lsp.buf.definition, opts)
 		map('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -123,7 +161,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		map('n', 'K', vim.lsp.buf.hover, opts)
 	end,
 })
-vim.cmd("set completeopt+=menuone,noselect,popup")
 
 
 
