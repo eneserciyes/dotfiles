@@ -53,7 +53,7 @@ export HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd:vim'
 alias src="source ~/.zshrc"
 alias venv="source .venv/bin/activate"
 alias c="claude"
-alias cr="claude --resume" 
+alias cr="claude --resume"
 alias vim="nvim"
 alias vi="nvim"
 alias im="nvim"
@@ -78,6 +78,9 @@ autoload edit-command-line
 zmodload zsh/complist
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
+
+[[ -s /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -s /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 [[ -s /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -s /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

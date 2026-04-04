@@ -18,6 +18,7 @@ run install-ripgrep.sh
 run install-tmux.sh
 run install-wget.sh
 run install-timewarrior.sh
+run install-zsh-autosuggestions.sh
 run install-zsh-syntax-highlighting.sh
 
 # GitHub CLI (apt repo)
@@ -30,9 +31,6 @@ run install-hostess.sh
 
 # Neovim
 run install-neovim.sh
-
-# Font
-run install-jetbrains-mono-nerd-font.sh
 
 # Rust ecosystem
 run install-rustup.sh

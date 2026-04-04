@@ -49,6 +49,7 @@ vim.pack.add({
 	{ src = "https://github.com/akinsho/git-conflict.nvim" },
 	{ src = "https://github.com/NMAC427/guess-indent.nvim" },
 	{ src = "https://github.com/saghen/blink.cmp" },
+	{ src = "https://github.com/folke/which-key.nvim" },
 })
 
 require("vague").setup({ transparent = true })
@@ -83,11 +84,11 @@ hipatterns.setup({
 require("oil").setup(
 	{
 		lsp_file_methods = {
-				enabled = true,
-				timeout_ms = 1000,
-				autosave_changes = true,
+			enabled = true,
+			timeout_ms = 1000,
+			autosave_changes = true,
 		},
-		columns = {"icon"},
+		columns = { "icon" },
 		float = {
 			max_width = 0.3,
 			max_height = 0.6,
@@ -108,6 +109,7 @@ require("fidget").setup({})
 require("gitsigns").setup()
 require("git-conflict").setup()
 require("guess-indent").setup()
+require("which-key").setup()
 
 require("blink.cmp").setup({
 	keymap = {
@@ -181,7 +183,10 @@ end)
 -- Mappings
 map('n', '<leader>lf', function()
 	vim.lsp.buf.code_action({ context = { only = { "source.organizeImports.ruff" } }, apply = true })
-	vim.defer_fn(function() vim.lsp.buf.format() vim.cmd("write") end, 100)
+	vim.defer_fn(function()
+		vim.lsp.buf.format()
+		vim.cmd("write")
+	end, 100)
 end)
 map('n', '<leader>f', ':Pick files tool=\'git\'<CR>')
 map('n', '<leader>b', ':Pick buffers<CR>')
@@ -211,7 +216,7 @@ xnoremap <expr> . "<esc><cmd>'<,'>normal! ".v:count1.'.<cr>'
 
 map("n", "gh", "0", { desc = "Jump: Start of line" })
 map("n", "gl", "$", { desc = "Jump: End of line" })
-vim.keymap.set("n", "yab", ":%y<CR>", {silent = true})
+vim.keymap.set("n", "yab", ":%y<CR>", { silent = true })
 vim.keymap.set("n", "vab", "ggVG", { noremap = true, silent = true })
 
 vim.keymap.set("n", "n", "nzzzv")
@@ -225,9 +230,3 @@ vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
 map({ "n", "v", "x" }, "<C-s>", [[:s/\V]], { desc = "Enter substitue mode in selection" })
 map({ "v", "x", "n" }, "<C-y>", '"+y', { desc = "System clipboard yank." })
 map({ "n" }, "<leader>c", "1z=")
-
-
-
-
-
-
