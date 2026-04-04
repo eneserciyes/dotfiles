@@ -39,20 +39,47 @@ vim.cmd(":hi statusline guibg=None")
 vim.pack.add({
 	{ src = "https://github.com/vague-theme/vague.nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-mini/mini.pick" },
-	{ src = "https://github.com/nvim-mini/mini.extra" },
+	{ src = "https://github.com/nvim-mini/mini.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/j-hui/fidget.nvim" },
+	{ src = "https://github.com/stevearc/aerial.nvim" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/akinsho/git-conflict.nvim" },
+	{ src = "https://github.com/NMAC427/guess-indent.nvim" },
 })
 
 require("vague").setup({ transparent = true })
 vim.cmd('colorscheme vague')
 
-require("mason").setup()
+require("mason").setup({
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
+})
 require("mini.pick").setup()
 require("mini.extra").setup()
+require("mini.animate").setup({
+	cursor = { enable = false },
+	scroll = { enable = false },
+})
+require("mini.trailspace").setup()
+local hipatterns = require("mini.hipatterns")
+hipatterns.setup({
+	highlighters = {
+		fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+		hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+		todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+		note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+		hex_color = hipatterns.gen_highlighter.hex_color(),
+	},
+})
 require("oil").setup(
 	{
 		lsp_file_methods = {
@@ -69,18 +96,12 @@ require("oil").setup(
 	}
 )
 require("supermaven-nvim").setup({})
-local ts_ft_to_lang = { help = "vimdoc", markdown = "markdown" }
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lua", "python", "c", "cpp", "rust", "gitignore", "gitcommit", "markdown", "help", "json", "yaml", "toml" },
-	callback = function(args)
-		local lang = ts_ft_to_lang[args.match] or args.match
-		if not pcall(vim.treesitter.language.inspect, lang) then
-			vim.cmd("TSInstall " .. lang)
-			if args.match == "markdown" then vim.cmd("TSInstall markdown_inline") end
-		end
-		vim.treesitter.start()
-	end,
-})
+require("fidget").setup({})
+require("aerial").setup()
+require("gitsigns").setup()
+require("git-conflict").setup()
+require("guess-indent").setup()
+map('n', '<leader>a', '<cmd>AerialToggle!<CR>')
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
@@ -125,6 +146,7 @@ map('n', '<leader>b', ':Pick buffers<CR>')
 map('n', '<leader>rg', ':Pick grep_live<CR>')
 map('n', '<leader>h', ':Pick help<CR>')
 map('n', '<leader>k', ':Pick keymaps<CR>')
+map('n', '<leader>p', ':Pick oldfiles<CR>')
 map('n', '<leader>e', ':Oil<CR>')
 
 map('n', '<leader>o', ':update<CR> :source<CR>')
@@ -157,8 +179,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
-
-map({ "n", "v", "x" }, "<CR>", ":", { desc = "Self explanatory" })
 
 map({ "n", "v", "x" }, "<C-s>", [[:s/\V]], { desc = "Enter substitue mode in selection" })
 map({ "v", "x", "n" }, "<C-y>", '"+y', { desc = "System clipboard yank." })
