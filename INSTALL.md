@@ -5,4 +5,4 @@
    - **macOS**: uses `brew bundle` with Brewfile
    - **Linux**: runs individual install scripts from `install/`
 3. macOS settings: `bash ~/ws/oh-my-dot/settings.sh`
-4. Bob (neovim): install separately via bob
+4. Neovim: installed automatically via `brew` (macOS) or `install/install-neovim.sh` (Linux)

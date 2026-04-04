@@ -28,6 +28,9 @@ run install-lazygit.sh
 run install-sk.sh
 run install-hostess.sh
 
+# Neovim
+run install-neovim.sh
+
 # Font
 run install-jetbrains-mono-nerd-font.sh
 

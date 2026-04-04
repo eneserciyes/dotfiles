@@ -39,7 +39,6 @@ SAVEHIST=50000
 setopt SHARE_HISTORY
 
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.local/share/bob/nvim-bin/:$PATH"
 export PATH="$HOME/.local/scripts:$PATH"
 
 export GG_WS="$HOME/ws/"
@@ -78,10 +77,6 @@ autoload edit-command-line
 zmodload zsh/complist
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
-
-export NVM_DIR=~/.nvm
-[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -s /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -s /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
