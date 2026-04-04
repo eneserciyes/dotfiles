@@ -91,7 +91,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		local opts = { buffer = args.buf }
 		map('n', 'gd', vim.lsp.buf.definition, opts)
 		map('n', 'gD', vim.lsp.buf.declaration, opts)
-		map('n', 'gr', vim.lsp.buf.references, opts)
+		map('n', 'gr', ':Pick lsp scope=\'references\'<CR>', opts)
 		map('n', '<leader>rn', vim.lsp.buf.rename, opts)
 		map('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 		map('n', 'K', vim.lsp.buf.hover, opts)

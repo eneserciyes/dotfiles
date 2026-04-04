@@ -38,6 +38,7 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt SHARE_HISTORY
 
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/scripts:$PATH"
 

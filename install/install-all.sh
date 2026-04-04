@@ -34,6 +34,9 @@ run install-neovim.sh
 # Font
 run install-jetbrains-mono-nerd-font.sh
 
+# Rust ecosystem
+run install-rustup.sh
+
 # Python ecosystem
 run install-uv.sh
 
