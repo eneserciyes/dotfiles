@@ -45,7 +45,6 @@ vim.pack.add({
 	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/j-hui/fidget.nvim" },
-	{ src = "https://github.com/stevearc/aerial.nvim" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/akinsho/git-conflict.nvim" },
 	{ src = "https://github.com/NMAC427/guess-indent.nvim" },
@@ -95,13 +94,19 @@ require("oil").setup(
 		},
 	}
 )
-require("supermaven-nvim").setup({})
+
+require("supermaven-nvim").setup({
+	keymaps = {
+		accept_suggestion = "<C-j>",
+		clear_suggestion = "<C-]>",
+		accept_word = "<C-k>",
+	},
+	disable_keymaps = false,
+})
 require("fidget").setup({})
-require("aerial").setup()
 require("gitsigns").setup()
 require("git-conflict").setup()
 require("guess-indent").setup()
-map('n', '<leader>a', '<cmd>AerialToggle!<CR>')
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
