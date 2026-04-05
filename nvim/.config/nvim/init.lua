@@ -1,39 +1,58 @@
--- Disable unused built-in plugins.
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tohtml = 1
-vim.g.loaded_tutor = 1
+--- Enes's Neovim config
+----------------------------------------------
+---  SETTINGS
+----------------------------------------------
+-- Set <space> as the leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
+-- No nerd font	
+vim.g.have_nerd_font = false
+
+-- Line numbers
 vim.o.number = true
 vim.o.relativenumber = true
+
+-- no need for mode
+vim.o.showmode = false
+
+-- case insensitive search unless	there is a capital letter
 vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- no wrap
 vim.o.wrap = false
-vim.o.winborder = "rounded"
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.smartindent = true
-vim.o.termguicolors = true
-vim.o.swapfile = false
-vim.o.signcolumn = "yes"
-vim.o.undofile = true
-vim.o.incsearch = true
-vim.o.hlsearch = false
-vim.o.autoread = true
+
+-- decrease mapped sequence resolve timeoutlen
 vim.o.timeoutlen = 200
 vim.o.ttimeoutlen = 10
+
+-- no mouse
 vim.o.mouse = ""
-vim.o.showmode = false
-vim.api.nvim_create_autocmd("FocusGained", { command = "checktime" }) -- reload buffer on focus
+
+-- swapfile is annoying only
+vim.o.swapfile = false
+
+-- keep signcolumn on
+vim.o.signcolumn = "yes"
+
+-- better looking rounded borders
+vim.o.winborder = "rounded"
+
+-- Enable undo/redo changes even after closing and reopening a file
+vim.o.undofile = true
+
+-- Enable search as you type
+vim.o.incsearch = true
+
+-- reoload buffer on focus
+vim.o.autoread = true
+vim.api.nvim_create_autocmd("FocusGained", { command = "checktime" })
+
+-- Set statusline high and no background
+vim.cmd(":hi statusline guibg=None")
 
 local map = vim.keymap.set
-
-vim.g.mapleader = " "
-vim.cmd(":hi statusline guibg=None")
 
 -- Plugins
 vim.pack.add({
