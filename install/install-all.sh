@@ -42,4 +42,7 @@ run install-uv.sh
 run install-node.sh
 run install-tree-sitter-cli.sh
 
+# APT repo packages
+run install-slack.sh
+
 echo "=== All done! ==="

@@ -34,7 +34,7 @@ vim.o.mouse = ""
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
+-- vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- swapfile is annoying only
 vim.o.swapfile = false
@@ -65,6 +65,15 @@ vim.o.confirm = true
 -- Set statusline high and no background
 vim.cmd(":hi statusline guibg=None")
 
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.hl.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function() vim.hl.on_yank() end,
+})
+
 ----------------------------------------------
 ---  REMAPS
 ----------------------------------------------
@@ -73,6 +82,7 @@ local map = vim.keymap.set
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 map('n', '<leader>lf', function()
+	-- TODO: solve this with conform
 	vim.lsp.buf.code_action({ context = { only = { "source.organizeImports.ruff" } }, apply = true })
 	vim.defer_fn(function()
 		vim.lsp.buf.format()
@@ -121,14 +131,6 @@ map({ "n", "v", "x" }, "<C-s>", [[:s/\V]], { desc = "Enter substitue mode in sel
 map({ "v", "x", "n" }, "<C-y>", '"+y', { desc = "System clipboard yank." })
 map({ "n" }, "<leader>c", "1z=")
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function() vim.hl.on_yank() end,
-})
 
 ----------------------------------------------
 ---  LSP & DIAGNOSTICS
@@ -148,6 +150,7 @@ vim.diagnostic.config {
 }
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 map('n', '<leader>lt', function()
+	-- TODO: put in Lspconfig 
 	local clients = vim.lsp.get_clients()
 	if #clients > 0 then
 		vim.lsp.stop_client(clients)

@@ -5,4 +5,5 @@
 - tmux copy mode: `copy-selection` clears the selection but stays in copy mode. `copy-selection-and-cancel` copies and exits copy mode. They are NOT the same.
 
 - Installing for Ubuntu is inside './install/' and installing for Mac is with brew and './Brewfile'
-When you add/remove new installations, add/remove them for both Ubuntu and Mac.  
+When you add/remove new installations, add/remove them for both Ubuntu and Mac.
+Always add/remove the script entry in `install/install-all.sh` as well.
