@@ -29,6 +29,12 @@ tcc() {
 	tmux send-keys -t 2 'claude' Enter
 	tmux select-pane -t 0
 }
+re-tcc() {
+	local panes=$(tmux display-message -p '#{window_panes}')
+	[[ $panes -ne 3 ]] && echo "need exactly 3 panes" && return 1
+	tmux resize-pane -t 2 -x 30%
+	tmux resize-pane -t 1 -y 20%
+}
 
 zle -N finder
 bindkey '^f' finder
