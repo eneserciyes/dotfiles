@@ -69,9 +69,9 @@ vim.cmd(":hi statusline guibg=None")
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function() vim.hl.on_yank() end,
+	desc = 'Highlight when yanking (copying) text',
+	group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+	callback = function() vim.hl.on_yank() end,
 })
 
 ----------------------------------------------
@@ -149,17 +149,6 @@ vim.diagnostic.config {
 	jump = { float = true },
 }
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-map('n', '<leader>lt', function()
-	-- TODO: put in Lspconfig 
-	local clients = vim.lsp.get_clients()
-	if #clients > 0 then
-		vim.lsp.stop_client(clients)
-		print("LSP stopped")
-	else
-		vim.lsp.enable(lsp_servers)
-		print("LSP started")
-	end
-end)
 
 
 
@@ -178,6 +167,7 @@ vim.pack.add({
 	{ src = "https://github.com/NMAC427/guess-indent.nvim" },
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/folke/which-key.nvim" },
+	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 })
 
 require("vague").setup({ transparent = true })
@@ -211,6 +201,9 @@ hipatterns.setup({
 })
 require("oil").setup(
 	{
+		view_options = {
+			show_hidden = true,
+		},
 		lsp_file_methods = {
 			enabled = true,
 			timeout_ms = 1000,
@@ -296,3 +289,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local lsp_servers = { "lua_ls", "basedpyright", "clangd", "ruff" }
 vim.lsp.enable(lsp_servers)
+map('n', '<leader>lt', function()
+	local clients = vim.lsp.get_clients()
+	if #clients > 0 then
+		vim.lsp.stop_client(clients)
+		print("LSP stopped")
+	else
+		vim.lsp.enable(lsp_servers)
+		print("LSP started")
+	end
+end)

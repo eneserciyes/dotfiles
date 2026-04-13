@@ -45,4 +45,7 @@ run install-tree-sitter-cli.sh
 # APT repo packages
 run install-slack.sh
 
+# Desktop apps (Linux only)
+run install-solaar.sh
+
 echo "=== All done! ==="

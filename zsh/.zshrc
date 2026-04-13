@@ -22,11 +22,11 @@ mkcd() {
 tcc() {
 	local panes=$(tmux display-message -p '#{window_panes}')
 	[[ $panes -gt 1 ]] && echo "more than 1 pane" && return 0
-	tmux split-window -v -p 20
-	tmux select-pane -t 0
 	tmux split-window -h -p 30
+	tmux select-pane -t 0
+	tmux split-window -v -p 20
 	tmux send-keys -t 0 'nvim .' Enter
-	tmux send-keys -t 1 'claude' Enter
+	tmux send-keys -t 2 'claude' Enter
 	tmux select-pane -t 0
 }
 
@@ -37,6 +37,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
 setopt SHARE_HISTORY
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
