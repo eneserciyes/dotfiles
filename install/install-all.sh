@@ -41,6 +41,7 @@ run install-uv.sh
 # Node ecosystem (order matters)
 run install-node.sh
 run install-tree-sitter-cli.sh
+run install-pyright.sh
 
 # APT repo packages
 run install-slack.sh

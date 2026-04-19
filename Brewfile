@@ -18,6 +18,7 @@ brew "syncthing", restart_service: :changed
 brew "timewarrior"
 brew "tmux"
 brew "tree-sitter-cli"
+brew "pyright"
 brew "wget"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
