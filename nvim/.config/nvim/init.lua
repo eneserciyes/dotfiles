@@ -6,8 +6,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- No nerd font
-vim.g.have_nerd_font = false
+-- Nerd font (JetBrainsMono Nerd Font installed)
+vim.g.have_nerd_font = true
 
 -- Line numbers
 vim.o.number = true
@@ -89,13 +89,19 @@ map('n', '<leader>lf', function()
 		vim.cmd("write")
 	end, 100)
 end)
-map('n', '<leader>f', ':Pick files tool=\'git\'<CR>')
-map('n', '<leader>b', ':Pick buffers<CR>')
-map('n', '<leader>rg', ':Pick grep_live<CR>')
-map('n', '<leader>h', ':Pick help<CR>')
-map('n', '<leader>k', ':Pick keymaps<CR>')
-map('n', '<leader>p', ':Pick oldfiles<CR>')
+map('n', '<leader>f', function() Snacks.picker.git_files() end)
+map('n', '<leader>b', function() Snacks.picker.buffers() end)
+map('n', '<leader>rg', function() Snacks.picker.grep() end)
+map('n', '<leader>h', function() Snacks.picker.help() end)
+map('n', '<leader>k', function() Snacks.picker.keymaps() end)
+map('n', '<leader>p', function() Snacks.picker.recent() end)
 map('n', '<leader>e', ':Oil<CR>')
+
+map('n', '<leader>gg', function() Snacks.lazygit() end)
+map({ 'n', 'v' }, '<leader>gb', function() Snacks.gitbrowse() end)
+map('n', '<leader>z', function() Snacks.zen() end)
+map('n', '<leader>bd', function() Snacks.bufdelete() end)
+map('n', '<C-/>', function() Snacks.terminal() end)
 
 map('n', '<leader>o', ':update<CR> :source<CR>')
 map('n', '<leader>w', ':write<CR>')
@@ -151,140 +157,155 @@ vim.diagnostic.config {
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 
+----------------------------------------------
+---  PLUGINS (lazy.nvim)
+----------------------------------------------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	vim.fn.system({
+		"git", "clone", "--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Plugins
-vim.pack.add({
-	{ src = "https://github.com/vague-theme/vague.nvim" },
-	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-mini/mini.nvim" },
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/j-hui/fidget.nvim" },
-	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-	{ src = "https://github.com/akinsho/git-conflict.nvim" },
-	{ src = "https://github.com/NMAC427/guess-indent.nvim" },
-	{ src = "https://github.com/saghen/blink.cmp" },
-	{ src = "https://github.com/folke/which-key.nvim" },
-	{ src = "https://github.com/kdheepak/lazygit.nvim" },
-})
-
-require("vague").setup({ transparent = true })
-vim.cmd('colorscheme vague')
-
-require("mason").setup({
-	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
-	},
-})
-require("mini.pick").setup()
-require("mini.extra").setup()
-require("mini.animate").setup({
-	cursor = { enable = false },
-	scroll = { enable = false },
-})
-require("mini.trailspace").setup()
-local hipatterns = require("mini.hipatterns")
-hipatterns.setup({
-	highlighters = {
-		fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-		hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-		todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-		note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-		hex_color = hipatterns.gen_highlighter.hex_color(),
-	},
-})
-require("oil").setup(
+require("lazy").setup({
 	{
-		view_options = {
-			show_hidden = true,
-		},
-		lsp_file_methods = {
-			enabled = true,
-			timeout_ms = 1000,
-			autosave_changes = true,
-		},
-		columns = { "icon" },
-		float = {
-			max_width = 0.3,
-			max_height = 0.6,
-			border = "rounded",
-		},
-	}
-)
-
-require("supermaven-nvim").setup({
-	keymaps = {
-		accept_suggestion = "<C-j>",
-		clear_suggestion = "<C-]>",
-		accept_word = "<C-k>",
-	},
-	disable_keymaps = false,
-})
-require("fidget").setup({})
-require("gitsigns").setup()
-require("git-conflict").setup()
-require("guess-indent").setup()
-require("which-key").setup()
-
-require("blink.cmp").setup({
-	keymap = {
-		preset = "none",
-		["<C-b>"] = { "scroll_documentation_up" },
-		["<C-f>"] = { "scroll_documentation_down" },
-		["<C-n>"] = { "show" },
-		["<CR>"] = { "accept", "fallback" },
-		["<Tab>"] = { "select_next", "fallback" },
-		["<S-Tab>"] = { "select_prev", "fallback" },
-	},
-	completion = {
-		list = {
-			selection = { preselect = false, auto_insert = false },
-		},
-		menu = { border = "rounded" },
-		documentation = {
-			auto_show = true,
-			window = { border = "rounded" },
-		},
-	},
-	sources = {
-		default = { "lsp", "path", "buffer" },
-		per_filetype = {
-			gitcommit = { "buffer" },
-		},
-	},
-	cmdline = {
-		sources = function()
-			local type = vim.fn.getcmdtype()
-			if type == "/" or type == "?" then
-				return { "buffer" }
-			end
-			if type == ":" then
-				return { "cmdline", "path" }
-			end
-			return {}
+		"vague-theme/vague.nvim",
+		priority = 1000,
+		lazy = false,
+		config = function()
+			require("vague").setup({ transparent = true })
+			vim.cmd("colorscheme vague")
 		end,
 	},
-	signature = { enabled = true },
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			bigfile   = { enabled = true },
+			quickfile = { enabled = true },
+			picker    = { enabled = true },
+			notifier  = { enabled = true, timeout = 3000 },
+			input     = { enabled = true },
+			dashboard = { enabled = true },
+			zen       = { enabled = true },
+			terminal  = { enabled = true },
+			bufdelete = { enabled = true },
+			gitbrowse = { enabled = true },
+			lazygit   = { enabled = true },
+		},
+	},
+	{
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup({
+				view_options = { show_hidden = true },
+				lsp_file_methods = {
+					enabled = true,
+					timeout_ms = 1000,
+					autosave_changes = true,
+				},
+				columns = { "icon" },
+				float = {
+					max_width = 0.3,
+					max_height = 0.6,
+					border = "rounded",
+				},
+			})
+		end,
+	},
+	{ "neovim/nvim-lspconfig" },
+	{
+		"mason-org/mason.nvim",
+		opts = {
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		},
+	},
+	{
+		"supermaven-inc/supermaven-nvim",
+		opts = {
+			keymaps = {
+				accept_suggestion = "<C-j>",
+				clear_suggestion = "<C-]>",
+				accept_word = "<C-k>",
+			},
+			disable_keymaps = false,
+		},
+	},
+	{ "nvim-treesitter/nvim-treesitter" },
+	{ "lewis6991/gitsigns.nvim",        opts = {} },
+	{ "akinsho/git-conflict.nvim",      opts = {} },
+	{ "NMAC427/guess-indent.nvim",      opts = {} },
+	{
+		"saghen/blink.cmp",
+		version = "1.*",
+		opts = {
+			keymap = {
+				preset = "none",
+				["<C-b>"] = { "scroll_documentation_up" },
+				["<C-f>"] = { "scroll_documentation_down" },
+				["<C-n>"] = { "show" },
+				["<CR>"] = { "accept", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+			},
+			completion = {
+				list = {
+					selection = { preselect = false, auto_insert = false },
+				},
+				menu = { border = "rounded" },
+				documentation = {
+					auto_show = true,
+					window = { border = "rounded" },
+				},
+			},
+			sources = {
+				default = { "lsp", "path", "buffer" },
+				per_filetype = {
+					gitcommit = { "buffer" },
+				},
+			},
+			cmdline = {
+				sources = function()
+					local type = vim.fn.getcmdtype()
+					if type == "/" or type == "?" then
+						return { "buffer" }
+					end
+					if type == ":" then
+						return { "cmdline", "path" }
+					end
+					return {}
+				end,
+			},
+			signature = { enabled = true },
+		},
+	},
+	{ "folke/which-key.nvim",   opts = {} },
+	{ "echasnovski/mini.icons", lazy = true, opts = {} },
 })
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
 		local opts = { buffer = args.buf }
 		map('n', 'gd', vim.lsp.buf.definition, opts)
 		map('n', 'gD', vim.lsp.buf.declaration, opts)
-		map('n', 'gr', ':Pick lsp scope=\'references\'<CR>', opts)
+		map('n', 'gr', function() Snacks.picker.lsp_references() end, opts)
 		map('n', '<leader>rn', vim.lsp.buf.rename, opts)
 		map('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 		map('n', 'K', vim.lsp.buf.hover, opts)
 	end,
 })
-
 
 
 local lsp_servers = { "lua_ls", "basedpyright", "clangd", "ruff" }
