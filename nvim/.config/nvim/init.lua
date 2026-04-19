@@ -89,6 +89,7 @@ map('n', '<leader>lf', function()
 		vim.cmd("write")
 	end, 100)
 end)
+map('n', '<C-p>', function() Snacks.picker.smart() end)
 map('n', '<leader>f', function() Snacks.picker.git_files() end)
 map('n', '<leader>b', function() Snacks.picker.buffers() end)
 map('n', '<leader>rg', function() Snacks.picker.grep() end)
@@ -113,11 +114,6 @@ map({ "n", "t" }, "<Leader>x", "<Cmd>tabclose<CR>")
 
 vim.cmd([[
 nnoremap g= g+| " g=g=g= is less awkward than g+g+g+
-noremap! <c-r><c-d> <c-r>=strftime('%F')<cr>
-noremap! <c-r><c-t> <c-r>=strftime('%T')<cr>
-noremap! <c-r><c-f> <c-r>=expand('%:t')<cr>
-noremap! <c-r><c-p> <c-r>=expand('%:p')<cr>
-xnoremap <expr> . "<esc><cmd>'<,'>normal! ".v:count1.'.<cr>'
 ]])
 
 map("n", "gh", "0", { desc = "Jump: Start of line" })
@@ -184,7 +180,6 @@ require("lazy").setup({
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		---@type snacks.Config
 		opts = {
 			bigfile   = { enabled = true },
 			quickfile = { enabled = true },
@@ -292,6 +287,12 @@ require("lazy").setup({
 	},
 	{ "folke/which-key.nvim",   opts = {} },
 	{ "echasnovski/mini.icons", lazy = true, opts = {} },
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		event = "VimEnter",
+		opts = {},
+	},
 })
 
 
