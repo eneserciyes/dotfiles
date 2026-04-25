@@ -1,10 +1,6 @@
 bindkey -e
 autoload -U colors && colors
-if [[ -n "$SSH_TTY" ]]; then
-	PS1="%{$fg[yellow]%}[ssh] %{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%} $ "
-else
-	PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%} $ "
-fi
+PS1="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%} $ "
 
 if [[ "$(uname)" == "Darwin" ]]; then
 	MAC=1
