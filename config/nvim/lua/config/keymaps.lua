@@ -11,11 +11,9 @@ map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "[T]oggle [w]rap" })
 -- Floating cheat-sheet overlay (a tab per tool). See lua/config/cheatsheet.lua.
 map("n", "<leader>?", function() require("config.cheatsheet").open() end, { desc = "Cheat sheet overlay" })
 
--- Move between splits/windows with Ctrl + h/j/k/l.
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+-- Move between splits/windows with Ctrl + h/j/k/l. These are provided by
+-- vim-tmux-navigator (see lua/plugins/tmux.lua) so they also cross into tmux
+-- panes at the edge of the window layout.
 
 -- Cycle buffers (VSCode-like tab switching).
 map("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })

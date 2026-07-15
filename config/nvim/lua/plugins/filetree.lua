@@ -15,6 +15,10 @@ return {
     opts = {
       view_options = { show_hidden = true },
       columns = { "icon" },
+      keymaps = {
+        ["<C-l>"] = false, -- keep window movement; unmap oil's default refresh
+        ["<C-h>"] = false, -- keep window movement; unmap oil's default split-select
+      },
       float = {
         max_width = 0.3,
         max_height = 0.6,

@@ -11,7 +11,7 @@ M.sections = {
   { name = "Neovim", lines = {
     "Leader = <Space>   (which-key pops these up as you type)",
     "",
-    "<C-h/j/k/l>      move between splits",
+    "<C-h/j/k/l>      move between splits / tmux panes",
     "<S-l> / <S-h>    next / prev buffer",
     "<leader>bp / bd  pick a buffer / pick one to close",
     "<C-d> / <C-u>    half-page down / up (centered)",
