@@ -60,5 +60,15 @@ return {
     keys = {
       { "<leader>gg", "<cmd>LazyGit<CR>", desc = "LazyGit (full git UI)" },
     },
+    init = function()
+      -- vim-tmux-navigator maps <C-l> in terminal mode too (only fzf is exempt),
+      -- so it would jump out of the lazygit float. Pass <C-l> through to lazygit.
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "lazygit",
+        callback = function(ev)
+          vim.keymap.set("t", "<C-l>", "<C-l>", { buffer = ev.buf })
+        end,
+      })
+    end,
   },
 }

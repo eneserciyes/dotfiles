@@ -177,31 +177,31 @@ install_tmux_source() {  # build tmux from source into /usr/local (needs a compi
     command -v tmux >/dev/null 2>&1
 }
 
-font_present() {  # is Hack Nerd Font already installed?
+font_present() {  # is JetBrains Mono Nerd Font already installed?
     if command -v fc-list >/dev/null 2>&1; then
-        fc-list 2>/dev/null | grep -qi "Hack Nerd Font"
+        fc-list 2>/dev/null | grep -qi "JetBrainsMono Nerd Font"
     else
-        ls "$HOME/Library/Fonts" /Library/Fonts "$HOME/.local/share/fonts" 2>/dev/null | grep -qi "HackNerdFont"
+        ls "$HOME/Library/Fonts" /Library/Fonts "$HOME/.local/share/fonts" 2>/dev/null | grep -qi "JetBrainsMonoNerdFont"
     fi
 }
 
-install_nerdfont_release() {  # download Hack Nerd Font (no root)
+install_nerdfont_release() {  # download JetBrains Mono Nerd Font (no root)
     local url dest tmp
-    url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
+    url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
     # macOS (CoreText) only scans ~/Library/Fonts; fontconfig Linux scans
     # ~/.local/share/fonts. Installing to the wrong one = invisible font.
     if [ "$OS" = "Darwin" ]; then
-        dest="$HOME/Library/Fonts/HackNerdFont"
+        dest="$HOME/Library/Fonts/JetBrainsMonoNerdFont"
     else
-        dest="$HOME/.local/share/fonts/HackNerdFont"
+        dest="$HOME/.local/share/fonts/JetBrainsMonoNerdFont"
     fi
-    echo "  → Hack Nerd Font -> $dest"
+    echo "  → JetBrains Mono Nerd Font -> $dest"
     if [ "$DRY_RUN" = "1" ]; then echo "    [dry-run] dl $url; unzip into $dest; fc-cache -f"; return 0; fi
     have_dl || { echo "  ! need curl or wget"; return 1; }
     command -v unzip >/dev/null 2>&1 || pm_install unzip
     mkdir -p "$dest"; tmp="$(mktemp -d)"
-    dl "$url" "$tmp/Hack.zip" || { rm -rf "$tmp"; return 1; }
-    unzip -qo "$tmp/Hack.zip" -d "$dest" || { rm -rf "$tmp"; return 1; }
+    dl "$url" "$tmp/JetBrainsMono.zip" || { rm -rf "$tmp"; return 1; }
+    unzip -qo "$tmp/JetBrainsMono.zip" -d "$dest" || { rm -rf "$tmp"; return 1; }
     command -v fc-cache >/dev/null 2>&1 && fc-cache -f "$(dirname "$dest")" >/dev/null 2>&1
     rm -rf "$tmp"
 }
@@ -513,6 +513,42 @@ else
     echo "  ! uv unavailable; later run: uv tool install ruff && uv tool install ty"
 fi
 
+# ---- Rust toolchain (rustup) + rust-analyzer LSP ---------------------------
+# rustup installs the stable toolchain into ~/.cargo (no root); the
+# rust-analyzer COMPONENT gives neovim's LSP its server binary and drops a
+# `rust-analyzer` proxy into ~/.cargo/bin. The official installer is used on
+# every OS (brew's rust/rustup split makes component management fiddly). bashrc
+# sources ~/.cargo/env, so the binaries land on PATH for interactive shells.
+echo
+echo "Rust toolchain (rustup + rust-analyzer LSP):"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+if command -v rustup >/dev/null 2>&1; then
+    printf '  ✓ %-13s present\n' rustup
+else
+    echo "  → rustup        rustup.rs installer (installs the stable toolchain)"
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "    [dry-run] curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path"
+    elif command -v curl >/dev/null 2>&1; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+        [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+    else
+        echo "  ! rustup: need curl (see https://rustup.rs)"
+    fi
+fi
+# rust-analyzer via the rustup component (stays in sync with the toolchain).
+# NB: `command -v rust-analyzer` is NOT a valid presence check — rustup always
+# ships a proxy of that name even when the component is missing (running it then
+# fails with "Unknown binary 'rust-analyzer'..."). Probe --version for real.
+ra_ver="$(rust-analyzer --version 2>/dev/null)"
+if [ -n "$ra_ver" ]; then
+    printf '  ✓ %-13s present (%s)\n' rust-analyzer "${ra_ver#rust-analyzer }"
+elif command -v rustup >/dev/null 2>&1 || [ "$DRY_RUN" = "1" ]; then
+    printf '  → %-13s rustup component add\n' rust-analyzer
+    run rustup component add rust-analyzer
+else
+    echo "  ! rust-analyzer: run 'rustup component add rust-analyzer' once rustup is set up"
+fi
+
 # ---- optional: extra CLI tools (best-effort) -------------------------------
 # bat/fd back fzf previews and the tmux session picker; zoxide powers `z`.
 echo
@@ -552,15 +588,15 @@ fi
 # Only matters where you actually RUN a terminal (your Mac, or the Linux box if
 # used locally) — over SSH the glyphs are drawn by the Mac's Ghostty.
 echo
-echo "Nerd Font (Hack — neovim icons):"
+echo "Nerd Font (JetBrains Mono — neovim icons):"
 if font_present; then
-    echo "  ✓ Hack Nerd Font present"
+    echo "  ✓ JetBrains Mono Nerd Font present"
 elif [ "$PM" = "brew" ] && [ "$OS" = "Darwin" ]; then
     # casks are macOS-only; Linuxbrew falls through to the release download
-    echo "  → Hack Nerd Font (brew cask)"
-    pm_install --cask font-hack-nerd-font
+    echo "  → JetBrains Mono Nerd Font (brew cask)"
+    pm_install --cask font-jetbrains-mono-nerd-font
 elif have_dl; then
-    install_nerdfont_release || echo "  ! Hack Nerd Font: get it from https://github.com/ryanoasis/nerd-fonts"
+    install_nerdfont_release || echo "  ! JetBrains Mono Nerd Font: get it from https://github.com/ryanoasis/nerd-fonts"
 else
     echo "  ! install a Nerd Font (https://github.com/ryanoasis/nerd-fonts) for icons"
 fi
@@ -568,5 +604,5 @@ fi
 echo
 echo "Done. Reminders:"
 echo "  * ~/.local/bin must be on your PATH (the shell config adds it)."
-echo "  * Ghostty is configured to use Hack Nerd Font Mono (config/ghostty/config)."
+echo "  * Ghostty is configured to use JetBrainsMono Nerd Font (config/ghostty/config)."
 echo "  * First 'nvim' launch auto-installs plugins."

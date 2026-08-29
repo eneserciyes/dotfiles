@@ -3,13 +3,29 @@
 -- (Treesitter, which is also "UI", lives in its own file: treesitter.lua.)
 return {
   ----------------------------------------------------------------------------
-  -- Colorscheme: vscode.nvim — built to mirror VS Code's default dark theme
-  -- (Dark+/Dark Modern share the same core palette), so it should feel just
-  -- like your editor: same blues, oranges, teals. Rich treesitter + LSP
-  -- semantic-token highlighting.
-  -- NOTE: keep exactly ONE colorscheme spec enabled. tokyonight is kept below,
-  -- disabled, as an easy alternative.
+  -- Colorscheme: Flexoki — an ink-on-paper palette, warm off-white (#fffcf0)
+  -- against near-black (#100f0f). Backgrounds match `theme = light:Flexoki
+  -- Light,dark:Flexoki Dark` in config/ghostty/config exactly, so the editor and
+  -- the terminal stay in sync.
+  -- NOTE: keep exactly ONE colorscheme spec enabled. vague and tokyonight are
+  -- kept below, disabled, as easy alternatives.
   ----------------------------------------------------------------------------
+  {
+    "kepano/flexoki-neovim",
+    name = "flexoki",
+    enabled = true,
+    priority = 1000,
+    lazy = false,
+    -- Follows the macOS system appearance: nvim detects the terminal background
+    -- at startup and re-detects when ghostty sends a theme-change notification,
+    -- which flips 'background' and reloads the colorscheme. Plain "flexoki" (not
+    -- "flexoki-dark") is the variant-picking entry point — it loads with
+    -- `variant = 'auto'`, which reads 'background' — so no autocmd is needed.
+    config = function()
+      vim.cmd.colorscheme("flexoki")
+    end,
+  },
+
   {
       "vague-theme/vague.nvim",
       enabled = false,
@@ -19,30 +35,18 @@ return {
           vim.cmd("colorscheme vague")
       end,
   },
-  {
-    "Mofiqul/vscode.nvim",
-    enabled = false,
-    priority = 1000,             -- load the colorscheme before other UI plugins
-    opts = {
-      italic_comments = true,
-      underline_links = true,
-      terminal_colors = true,    -- recolor :terminal windows to match
-      -- transparent = true,     -- uncomment to use your terminal's background
-    },
-    config = function(_, opts)
-      vim.o.background = "dark"
-      require("vscode").setup(opts)
-      vim.cmd.colorscheme("vscode")
-    end,
-  },
-
-  -- Alternative: tokyonight. To use it, set enabled = true and disable vscode.
+  -- Alternative: tokyonight. To use it, set enabled = true and disable flexoki.
+  -- Also follows the system appearance. Plain "tokyonight" (not
+  -- "tokyonight-night") is the variant-picking entry point: it resolves to
+  -- `style` on a dark background and to "day" on a light one.
   {
     "folke/tokyonight.nvim",
-    enabled = true, -- set to true to enable (and disable the others)
+    enabled = false, -- set to true to enable (and disable the others)
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("tokyonight-night")
+    opts = { style = "night" }, -- the dark half of the pair
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
+      vim.cmd.colorscheme("tokyonight")
     end,
   },
 

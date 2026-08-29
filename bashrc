@@ -21,6 +21,10 @@ export PATH
 # uv's env file (adds its bin dir; only if installed on this machine)
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
+# rustup's env file (adds ~/.cargo/bin, home of rustc/cargo/rust-analyzer;
+# only if installed on this machine)
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 # Default editor: prefer neovim, fall back to vim (works on every box).
 if command -v nvim >/dev/null 2>&1; then
     export EDITOR=nvim
@@ -87,9 +91,69 @@ if command -v fzf >/dev/null 2>&1 && [ "$SHELL_TYPE" != "unknown" ]; then
     eval "$(fzf --"$SHELL_TYPE" 2>/dev/null)"
 fi
 
+# Ctrl-S: fuzzy-pick an SSH host (scripts/ssh-pick.sh) and connect. Inside tmux
+# the window is renamed to the host; allow-rename off in tmux.conf keeps that name
+# for the session. Only the keybinding lives here; the picker is the script.
+if command -v fzf >/dev/null 2>&1 && command -v ssh-pick >/dev/null 2>&1 \
+    && [ "$SHELL_TYPE" != "unknown" ]; then
+    # Free C-s from terminal flow control (XOFF) so the shell keybinding sees it.
+    [ -t 0 ] && stty -ixon 2>/dev/null
+
+    if [ "$SHELL_TYPE" = "zsh" ]; then
+        __ssh_pick_widget() {
+            local host; host=$(ssh-pick)
+            if [ -n "$host" ]; then
+                [ -n "$TMUX" ] && tmux rename-window "$host"
+                BUFFER="ssh $host"; zle accept-line
+            else
+                zle reset-prompt
+            fi
+        }
+        zle -N __ssh_pick_widget
+        bindkey '^S' __ssh_pick_widget
+    elif [ "$SHELL_TYPE" = "bash" ]; then
+        # bind -x can't submit the line, so drop it on the prompt to run with Enter.
+        __ssh_pick_widget() {
+            local host; host=$(ssh-pick)
+            [ -z "$host" ] && return
+            [ -n "$TMUX" ] && tmux rename-window "$host"
+            READLINE_LINE="ssh $host"; READLINE_POINT=${#READLINE_LINE}
+        }
+        bind -x '"\C-s": __ssh_pick_widget'
+    fi
+fi
+
 # Machine-local overrides: secrets, work tools, per-host aliases.
 # Lives only in $HOME, never tracked here. Sourced last so it can override.
 # (if-form, not `&&`: keeps this file's exit status 0 when no override exists)
 if [ -f "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"
 fi
+
+# >>> ari-pilot dora run guard >>>
+__ari_pilot_confirm_dora_run() {
+    [[ $- == *i* ]] || return 0
+    printf '\n[ari-pilot] Prefer starting flows from the dashboard.\n' >&2
+    printf '[ari-pilot] WARNING: existing Dora nodes will be killed before this command runs.\n' >&2
+    local answer
+    printf 'Continue? [y/N] ' >&2
+    read -r answer
+    [[ "$answer" == [yY] || "$answer" == [yY][eE][sS] ]]
+}
+
+if [[ $- == *i* ]]; then
+    dora() {
+        if [[ "$1" == "run" ]]; then
+            __ari_pilot_confirm_dora_run || return 130
+        fi
+        command dora "$@"
+    }
+
+    uv() {
+        if [[ "$1" == "run" && "$2" == "dora" && "$3" == "run" ]]; then
+            __ari_pilot_confirm_dora_run || return 130
+        fi
+        command uv "$@"
+    }
+fi
+# <<< ari-pilot dora run guard <<<

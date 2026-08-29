@@ -6,24 +6,28 @@
 #   ghostty +list-fonts      browse available fonts (grep -i nerd)
 #   ghostty +list-themes     browse built-in themes
 
-# Primary font. The "Mono" Nerd Font variant has every glyph pre-scaled to a
-# single terminal cell, so icons render crisp and aligned. (The non-Mono
-# "Hack Nerd Font" has wide icon glyphs that the terminal squeezes into one
-# cell, making them look narrow/squished.) install_deps.sh installs the family.
+# Primary font. This is the plain (non-"Mono") Nerd Font variant: icons keep
+# their natural ~2-cell advance width instead of being pre-scaled down to one
+# cell. Both variants cover the same glyphs — the trade-off is purely how wide
+# the icons are drawn. Append " Mono" to the family name to go back to
+# single-cell icons. install_deps.sh installs all variants in one download.
+# Two naming gotchas, both verified with `ghostty +show-face --cp=0x...`:
+#   * the family name has no space in "JetBrainsMono" — that is how the Nerd
+#     Font patcher names it;
+#   * `ghostty +list-fonts` does NOT list this family, because that action only
+#     reports monospace-classified faces. It still resolves fine here.
 # NOTE: Ghostty also falls back to bundled Nerd Font symbols automatically, so
-# icons render even if this font is missing — this just makes Hack the main font.
-font-family = "Hack Nerd Font Mono"
-font-size = 11
+# icons render even if this font is missing — this just makes JetBrains Mono the
+# main font.
+font-family = "JetBrainsMono Nerd Font"
+font-size = 12
+font-family = JetBrains Mono
+macos-non-native-fullscreen = visible-menu
+mouse-hide-while-typing = true
+
 
 # Option must act as Alt so fzf's Alt-C (fuzzy cd) works. Ghostty's unset
 # default only does this on U.S. keyboard layouts, so set it explicitly.
 # (Trade-off: Option no longer types special characters like é/© — use
 # press-and-hold instead.)
 macos-option-as-alt = true
-
-# Common extras — uncomment and tweak to taste.
-theme = "TokyoNight"
-# background-opacity = 0.95
-# confirm-close-surface = false
-# window-padding-x = 4
-# window-padding-y = 4

@@ -18,117 +18,122 @@ Match host *
 # NOTE: replace with your devvm ip
 Host devvm
   HostName devvm39659.prn0.facebook.com 
-  # HostName devgpu028.vcn5.facebook.com
   User eneserciyes
+
+# Vegas
+Host vega-u15
+  HostName vega-u15
+  User arijetson
+Host vega-u14
+  HostName vega-u14
+  User arijetson
+Host vega-u13
+  HostName vega-u13
+  User arijetson
+Host vega-u12
+  HostName vega-u12
+  User arijetson
+Host vega-u11
+  HostName vega-u11
+  User arijetson
+Host vega-u10
+  HostName vega-u10
+  User arijetson
+Host vega-u09
+  HostName vega-u09
+  User arijetson
+Host vega-u08
+  HostName vega-u08
+  User arijetson
+Host vega-u07
+  HostName vega-u07
+  User arijetson
+Host vega-u06
+  HostName vega-u06
+  User arijetson
+Host vega-u05
+  HostName vega-u05
+  User arijetson
+Host vega-u04
+  HostName vega-u04
+  User arijetson7
+Host vega-u03
+  HostName vega-u03
+  User arijetson9
+Host vega-u02
+  HostName vega-u02
+  User arijetson8
+Host vega-u01
+  HostName vega-u01
+  User arijetson
 
 Host vega-1
   HostName vega-1
   User dexmate
-
 Host vega-2
-  # HostName 2620:10d:c052:25c::831
-  # ProxyJump devvm
   HostName vega-2
   User dexmate
-
 Host vega-3
-  # HostName 2620:10d:c052:25c::823 
-  # ProxyJump devvm
   HostName vega-3
-	User dexmate
+  User dexmate
 
-Host vega-u05
-  # HostName 2620:10d:c052:25c::829
-  # ProxyJump devvm
-  HostName vega-u05
+
+# Policy servers
+Host policy-1
+  HostName 100.119.36.72
+  User admin
+
+Host testbench-1
+  HostName testbench-1
   User arijetson
-
-Host vega-u04
-  # HostName 2620:10d:c052:25c::82f
-  # ProxyJump devvm
-  HostName vega-u04
-  User arijetson10
-
-Host vega-u03
-  # HostName 2620:10d:c052:25c::830
-  # ProxyJump devvm
-  HostName vega-u03
-  User arijetson9
-
-Host vega-u02
-  # HostName 2620:10d:c052:25c::821
-  # ProxyJump devvm
-  HostName vega-u02
-  User arijetson8
-
-Host vega-u01
-  # HostName 2620:10d:c052:25c::828
-  # ProxyJump devvm
-  HostName vega-u01
-  User arijetson7
-
-# Host g1-1
-#   HostName g1-agx-orin-1
-#   User arijetson1
-# 
-# Host g1-2
-#   HostName g1-agx-orin-2
-#   User arijetson2
-# 
-# Host g1-3
-#   HostName g1-agx-orin-3
-#   User arijetson3
-# 
-# Host g1-4
-#   HostName g1-agx-orin-4
-#   User arijetson4
-# 
-Host g1-9
-	HostName g1-agx-orin-9
-	User arijetson9
-# 
-# Host g1-6
-# 	HostName g1-agx-orin-6
-# 	User arijetson6
-# 
-# Host g1-8
-# 	HostName g1-agx-orin-8
-# 	User arijetson8
-# 
-# Host g1-7
-# 	HostName g1-agx-orin-7
-# 	User arijetson
-# 
-# Host g1-5
-# 	HostName g1-agx-orin-5
-# 	User arijetson5
-# 
-# Host g1-10
-#   HostName g1-agx-orin-10
-#   User arijetson10
 
 Host bee
   HostName 100.104.32.64
   User enes
 
-Host aorus-2
-  HostName aorus-2
-  User user
-
-Host ws
-  HostName ari-12
-  User enes
-
-Host bench
-	HostName test-bench
-	User arijetson8
-
-Host runpod
-  HostName 103.196.86.204
-  User root
-  Port 16912
-
+# Luna
 Host umi-1
   HostName umi-1
   User arijetson
 
+# G1s
+
+Host g1-1
+  HostName g1-agx-orin-1
+  User arijetson1
+
+Host g1-2
+  HostName g1-agx-orin-2
+  User arijetson2
+
+Host g1-3
+  HostName g1-agx-orin-3
+  User arijetson3
+
+Host g1-4
+  HostName g1-agx-orin-4
+  User arijetson4
+
+Host g1-9
+  HostName g1-agx-orin-9
+  User arijetson9
+
+Host g1-6
+  HostName g1-agx-orin-6
+  User arijetson6
+
+Host g1-8
+  HostName g1-agx-orin-8
+  User arijetson8
+
+Host g1-7
+  HostName g1-agx-orin-7
+  User arijetson
+
+Host g1-5
+  HostName g1-agx-orin-5
+  User arijetson5
+
+Host g1-10
+  HostName g1-agx-orin-10
+  User arijetson10

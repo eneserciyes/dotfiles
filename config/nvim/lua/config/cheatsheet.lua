@@ -40,7 +40,7 @@ M.sections = {
     "K                hover docs",
     "<leader>rn       rename symbol",
     "<leader>ca       code action",
-    "<leader>cf       format buffer",
+    "<leader>cf       format buffer (+ sort imports in Python)",
     "<leader>cd       line diagnostics (float)",
     "]d / [d          next / prev diagnostic",
   }},

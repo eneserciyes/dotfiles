@@ -65,7 +65,7 @@ echo "  $SSH_DIR/config -> $DOTFILES/config/ssh/config"
 LOCAL_BIN="$HOME/.local/bin"
 mkdir -p "$LOCAL_BIN"
 echo "Linking scripts into $LOCAL_BIN"
-for script in ssh-connect tmux-session-dispensary open-github; do
+for script in ssh-pick tmux-session-dispensary open-github; do
     target="$LOCAL_BIN/$script"
     [ -e "$target" ] && [ ! -L "$target" ] && backup "$target"
     ln -sf "$DOTFILES/scripts/$script.sh" "$target"

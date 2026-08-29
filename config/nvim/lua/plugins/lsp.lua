@@ -51,11 +51,35 @@ return {
         filetypes = { "python" },
         root_markers = { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", ".git" },
       })
-      vim.lsp.enable({ "ruff", "ty" })
+      -- Rust: rust_analyzer needs no vim.lsp.config block — nvim-lspconfig
+      -- ships one. Install it via rustup ("rustup component add rust-analyzer",
+      -- done by install_deps.sh); nvim just needs it on PATH (~/.cargo/bin).
+      vim.lsp.enable({ "ruff", "ty", "rust_analyzer" })
 
       -- More languages: install the server on PATH and add it to the enable
       -- list. nvim-lspconfig ships the configs, so usually no vim.lsp.config
-      -- block is needed:  vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer" })
+      -- block is needed:  vim.lsp.enable({ "lua_ls", "clangd", "gopls" })
+
+      -- Ruff sorts imports via the `source.organizeImports` code action, NOT
+      -- via `ruff format`. Apply it synchronously so the edit lands before we
+      -- run the formatter (an async apply would race the format below).
+      local function organize_imports(bufnr)
+        for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr, name = "ruff" })) do
+          local params = vim.lsp.util.make_range_params(0, client.offset_encoding)
+          params.context = { only = { "source.organizeImports" }, diagnostics = {} }
+          local resp = client:request_sync("textDocument/codeAction", params, 1000, bufnr)
+          for _, action in pairs(resp and resp.result or {}) do
+            local edit = action.edit
+            if not edit and action.data then -- action needs resolving first
+              local resolved = client:request_sync("codeAction/resolve", action, 1000, bufnr)
+              edit = resolved and resolved.result and resolved.result.edit
+            end
+            if edit then
+              vim.lsp.util.apply_workspace_edit(edit, client.offset_encoding)
+            end
+          end
+        end
+      end
 
       -- Buffer-local keymaps, applied when a server attaches.
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -85,7 +109,13 @@ return {
           map("K", vim.lsp.buf.hover, "Hover docs")
           map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-          map("<leader>cf", function() vim.lsp.buf.format({ async = true }) end, "Format buffer")
+          map("<leader>cf", function()
+            -- Python: sort imports (ruff) first, then format. Other langs: just format.
+            if vim.bo[ev.buf].filetype == "python" then
+              organize_imports(ev.buf)
+            end
+            vim.lsp.buf.format({ async = false })
+          end, "Format buffer + organize imports")
           map("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
           map("]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Next diagnostic")
           map("[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Prev diagnostic")
