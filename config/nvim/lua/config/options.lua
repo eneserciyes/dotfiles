@@ -21,7 +21,7 @@ opt.hlsearch = true
 opt.incsearch = true
 
 -- UI / behavior
-opt.mouse = ""           -- mouse off in nvim so tmux owns pane-click focus
+opt.mouse = "a"          -- enable mouse support in all modes
 opt.signcolumn = "yes"   -- always show sign column (no jitter from gitsigns)
 opt.cursorline = true    -- highlight the current line
 opt.scrolloff = 8        -- keep context lines around the cursor

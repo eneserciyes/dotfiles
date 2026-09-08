@@ -3,50 +3,18 @@
 -- (Treesitter, which is also "UI", lives in its own file: treesitter.lua.)
 return {
   ----------------------------------------------------------------------------
-  -- Colorscheme: Flexoki — an ink-on-paper palette, warm off-white (#fffcf0)
-  -- against near-black (#100f0f). Backgrounds match `theme = light:Flexoki
-  -- Light,dark:Flexoki Dark` in config/ghostty/config exactly, so the editor and
-  -- the terminal stay in sync.
-  -- NOTE: keep exactly ONE colorscheme spec enabled. vague and tokyonight are
-  -- kept below, disabled, as easy alternatives.
+  -- Colorscheme: Rosé Pine, matching the terminal palette in Ghostty.
   ----------------------------------------------------------------------------
-  {
-    "kepano/flexoki-neovim",
-    name = "flexoki",
-    enabled = true,
-    priority = 1000,
-    lazy = false,
-    -- Follows the macOS system appearance: nvim detects the terminal background
-    -- at startup and re-detects when ghostty sends a theme-change notification,
-    -- which flips 'background' and reloads the colorscheme. Plain "flexoki" (not
-    -- "flexoki-dark") is the variant-picking entry point — it loads with
-    -- `variant = 'auto'`, which reads 'background' — so no autocmd is needed.
-    config = function()
-      vim.cmd.colorscheme("flexoki")
-    end,
-  },
 
   {
-      "vague-theme/vague.nvim",
-      enabled = false,
-      priority = 1000,
-      lazy = false,
-      config = function()
-          vim.cmd("colorscheme vague")
-      end,
-  },
-  -- Alternative: tokyonight. To use it, set enabled = true and disable flexoki.
-  -- Also follows the system appearance. Plain "tokyonight" (not
-  -- "tokyonight-night") is the variant-picking entry point: it resolves to
-  -- `style` on a dark background and to "day" on a light one.
-  {
-    "folke/tokyonight.nvim",
-    enabled = false, -- set to true to enable (and disable the others)
+    "rose-pine/neovim",
+    name = "rose-pine",
     priority = 1000,
-    opts = { style = "night" }, -- the dark half of the pair
+    lazy = false,
+    opts = { variant = "main" },
     config = function(_, opts)
-      require("tokyonight").setup(opts)
-      vim.cmd.colorscheme("tokyonight")
+      require("rose-pine").setup(opts)
+      vim.cmd.colorscheme("rose-pine")
     end,
   },
 

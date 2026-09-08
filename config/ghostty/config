@@ -21,9 +21,13 @@
 # main font.
 font-family = "JetBrainsMono Nerd Font"
 font-size = 12
-font-family = JetBrains Mono
 macos-non-native-fullscreen = visible-menu
 mouse-hide-while-typing = true
+term = xterm-256color
+theme = Rose Pine
+
+window-padding-x = 20
+window-padding-y = 10
 
 
 # Option must act as Alt so fzf's Alt-C (fuzzy cd) works. Ghostty's unset

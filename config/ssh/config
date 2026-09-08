@@ -1,3 +1,6 @@
+Host vega-* g1-* testbench-* luna-*
+  ForwardAgent ~/.fb-sks-agent/agent.sock
+
 Match host *
   SetEnv TERM=xterm-256color
   ServerAliveInterval 30
@@ -21,6 +24,18 @@ Host devvm
   User eneserciyes
 
 # Vegas
+Host vega-u19
+  HostName vega-u19
+  User arijetson
+Host vega-u18
+  HostName vega-u18
+  User arijetson
+Host vega-u17
+  HostName vega-u17
+  User arijetson
+Host vega-u16
+  HostName vega-u16
+  User arijetson
 Host vega-u15
   HostName vega-u15
   User arijetson
@@ -75,6 +90,9 @@ Host vega-2
   User dexmate
 Host vega-3
   HostName vega-3
+  User dexmate
+Host vega-5
+  HostName vega-5
   User dexmate
 
 
